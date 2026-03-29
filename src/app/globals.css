@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  /* Code here */
+}
+
+@theme inline {
+  /* Code here */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Code here */
+  }
+}
+
+body {
+  /* Code here */
+}
