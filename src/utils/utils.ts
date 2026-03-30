@@ -16,9 +16,69 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
 }
 
 export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime: number): PlanetaryHour[] {
-    return [{
-        startTime: new Date(),
-        endTime: new Date(),
-        planet: Planet.Jupiter,
-    }];
+    const startTime = new Date();
+    const endTime = new Date((startTime.getTime() + 60));
+
+    return [
+        {
+            startTime,
+            endTime,
+            planet: Planet.Mercury,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Jupiter,
+        },
+    ];
 }

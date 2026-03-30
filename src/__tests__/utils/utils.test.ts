@@ -2,6 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryDaytimeHours } from "@/utils/utils";
 
 import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
+import { Planet } from "@/utils/enums";
 import { HourLengths } from "@/utils/interfaces";
 
 describe('calculateDaytimeAndNighttimeHourLengths function', () => {
@@ -21,7 +22,7 @@ describe('generatePlanetaryDaytimeHours function', () => {
     const daytimeHourTime = 61.833333333333336;
 
     test.skip('generates the appropriate timetable given the daytime', () => {
-        expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime))
+        expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime));
     });
 
     test(`returns an array of exactly ${NUM_OF_PLANETARY_HOURS} planetary hours`, () => {
@@ -30,7 +31,7 @@ describe('generatePlanetaryDaytimeHours function', () => {
 
     test('expect the first hour to match the planetary day', () => {
         const { planet } = DAYS_OF_WEEK[currentDate.getDay()];
-        expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)[0].planet).toEqual(planet);
+        expect(Planet[generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)[0].planet]).toEqual(Planet[planet]);
     });
 
     test('startTime should be less than endTime for a given hour', () => {
