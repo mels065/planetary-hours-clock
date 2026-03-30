@@ -9,3 +9,9 @@ export interface HourLengths {
     daytimeHourTime: number;
     nighttimeHourTime: number;
 }
+
+export interface PlanetaryHour {
+    startTime: Date;
+    endTime: Date;
+    planet: Planet;
+}

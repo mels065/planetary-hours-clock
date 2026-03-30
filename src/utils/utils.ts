@@ -1,5 +1,6 @@
 import { MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
-import { HourLengths } from "./interfaces";
+import { Planet } from "./enums";
+import { HourLengths, PlanetaryHour } from "./interfaces";
 
 export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunsetTime: Date): HourLengths {
     const daytimeSpan = (sunsetTime.getTime() - sunriseTime.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
@@ -12,4 +13,12 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
         daytimeHourTime,
         nighttimeHourTime,
     };
-} 
+}
+
+export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime: number): PlanetaryHour[] {
+    return [{
+        startTime: new Date(),
+        endTime: new Date(),
+        planet: Planet.Jupiter,
+    }];
+}
