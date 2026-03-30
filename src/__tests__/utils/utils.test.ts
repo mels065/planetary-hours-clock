@@ -21,10 +21,6 @@ describe('generatePlanetaryDaytimeHours function', () => {
     const currentDate = new Date("March 25, 2026 06:55:00");
     const daytimeHourTime = 61.833333333333336;
 
-    test.skip('generates the appropriate timetable given the daytime', () => {
-        expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime));
-    });
-
     test('expect the first hour to match the planetary day, and to increment and wrap around again from there (i.e. if Mercury is first day, then the Moon is next, and then Saturn, etc.', () => {
         let { planet } = DAYS_OF_WEEK[currentDate.getDay()];
         const daytimeHours = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime);
@@ -46,4 +42,17 @@ describe('generatePlanetaryDaytimeHours function', () => {
             expect(startTime.getTime()).toBeLessThan(endTime.getTime());
         }
     });
+
+    test('endTime of previous hour should match startTime of next hour', () => {
+        const daytimeHours = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime);
+
+        expect.assertions(NUM_OF_PLANETARY_HOURS - 1);
+
+        for (let i = 0; i < daytimeHours.length - 1; i++) {
+            const currentHour = daytimeHours[i];
+            const nextHour = daytimeHours[i+1];
+
+            expect(currentHour.endTime.getTime()).toEqual(nextHour.startTime.getTime());
+        }
+    })
 });

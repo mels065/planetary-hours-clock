@@ -16,8 +16,8 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
 }
 
 export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime: number): PlanetaryHour[] {
-    const startTime = new Date();
-    const endTime = new Date((startTime.getTime() + 60));
+    let startTime = new Date();
+    let endTime = new Date((startTime.getTime() + 60));
 
     return [
         {
@@ -26,58 +26,58 @@ export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime
             planet: Planet.Mercury,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Moon,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Saturn,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Jupiter,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Mars,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Sun,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Venus,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Mercury,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Moon,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Saturn,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Jupiter,
         },
         {
-            startTime,
-            endTime,
+            startTime: (startTime = endTime),
+            endTime: (endTime = new Date((startTime.getTime() + 60))),
             planet: Planet.Mars,
         },
     ];
