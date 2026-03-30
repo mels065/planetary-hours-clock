@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryDaytimeHours } from "@/utils/utils";
+import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryDaytimeHours, getNumOfPlanets } from "@/utils/utils";
 
 import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
 import { Planet } from "@/utils/enums";
@@ -29,9 +29,14 @@ describe('generatePlanetaryDaytimeHours function', () => {
         expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)).toHaveLength(NUM_OF_PLANETARY_HOURS);
     });
 
-    test('expect the first hour to match the planetary day', () => {
-        const { planet } = DAYS_OF_WEEK[currentDate.getDay()];
-        expect(Planet[generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)[0].planet]).toEqual(Planet[planet]);
+    test('expect the first hour to match the planetary day, and to increment and wrap around again from there (i.e. if Mercury is first day, then the Moon is next, and then Saturn, etc.', () => {
+        let { planet } = DAYS_OF_WEEK[currentDate.getDay()];
+
+        const daytimeHours = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime);
+        for (const { planet: p } of daytimeHours) {
+            expect(Planet[p]).toEqual(Planet[planet]);
+            planet = (planet + 1) % getNumOfPlanets();
+        }
     });
 
     test('startTime should be less than endTime for a given hour', () => {

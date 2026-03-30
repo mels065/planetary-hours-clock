@@ -28,7 +28,12 @@ export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime
         {
             startTime: new Date(),
             endTime: new Date(),
-            planet: Planet.Jupiter,
+            planet: Planet.Moon,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Saturn,
         },
         {
             startTime: new Date(),
@@ -38,7 +43,32 @@ export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime
         {
             startTime: new Date(),
             endTime: new Date(),
-            planet: Planet.Jupiter,
+            planet: Planet.Mars,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Sun,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Venus,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Mercury,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Moon,
+        },
+        {
+            startTime: new Date(),
+            endTime: new Date(),
+            planet: Planet.Saturn,
         },
         {
             startTime: new Date(),
@@ -48,37 +78,11 @@ export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime
         {
             startTime: new Date(),
             endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: new Date(),
-            endTime: new Date(),
-            planet: Planet.Jupiter,
+            planet: Planet.Mars,
         },
     ];
+}
+
+export function getNumOfPlanets(): number {
+    return Math.floor(Object.keys(Planet).length / 2);
 }
