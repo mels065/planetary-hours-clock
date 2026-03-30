@@ -25,22 +25,25 @@ describe('generatePlanetaryDaytimeHours function', () => {
         expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime));
     });
 
-    test(`returns an array of exactly ${NUM_OF_PLANETARY_HOURS} planetary hours`, () => {
-        expect(generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)).toHaveLength(NUM_OF_PLANETARY_HOURS);
-    });
-
     test('expect the first hour to match the planetary day, and to increment and wrap around again from there (i.e. if Mercury is first day, then the Moon is next, and then Saturn, etc.', () => {
         let { planet } = DAYS_OF_WEEK[currentDate.getDay()];
-
         const daytimeHours = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime);
+        
+        expect.assertions(NUM_OF_PLANETARY_HOURS);
+
         for (const { planet: p } of daytimeHours) {
             expect(Planet[p]).toEqual(Planet[planet]);
             planet = (planet + 1) % getNumOfPlanets();
         }
     });
 
-    test('startTime should be less than endTime for a given hour', () => {
-        const { startTime, endTime } = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime)[0];
-        expect(startTime.getTime()).toBeLessThan(endTime.getTime());
+    test('startTime should be less than endTime for all given hours', () => {
+        const daytimeHours = generatePlanetaryDaytimeHours(currentDate, daytimeHourTime);
+
+        expect.assertions(NUM_OF_PLANETARY_HOURS);
+
+        for (const { startTime, endTime } of daytimeHours) {
+            expect(startTime.getTime()).toBeLessThan(endTime.getTime());
+        }
     });
 });
