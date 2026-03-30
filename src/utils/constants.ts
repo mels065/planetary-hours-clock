@@ -31,3 +31,8 @@ export const DAYS_OF_WEEK: DayOfWeekObj[] = [
         planet: Planet.Saturn
     },
 ]
+
+export const MINUTES_IN_DAY = 1440;
+export const MILLISECONDS_IN_SECOND = 1000;
+export const SECONDS_IN_MINUTE = 60;
+export const NUM_OF_PLANETARY_HOURS = 12;
