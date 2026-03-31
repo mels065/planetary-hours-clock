@@ -1,4 +1,4 @@
-import { MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
+import { DAYS_OF_WEEK, MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
 import { Planet } from "./enums";
 import { HourLengths, PlanetaryHour } from "./interfaces";
 
@@ -15,72 +15,20 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
     };
 }
 
-export function generatePlanetaryDaytimeHours(currentDate: Date, daytimeHourTime: number): PlanetaryHour[] {
-    let startTime = new Date();
-    let endTime = new Date((startTime.getTime() + 60));
+export function generatePlanetaryDaytimeHours(sunriseTime: Date, daytimeHourTime: number): PlanetaryHour[] {
+    const daytimeHours : PlanetaryHour[] = [];
+    let { planet } = DAYS_OF_WEEK[sunriseTime.getDay()];
 
-    return [
-        {
-            startTime,
-            endTime,
-            planet: Planet.Mercury,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Moon,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Saturn,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Mars,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Sun,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Venus,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Mercury,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Moon,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Saturn,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Jupiter,
-        },
-        {
-            startTime: (startTime = endTime),
-            endTime: (endTime = new Date((startTime.getTime() + 60))),
-            planet: Planet.Mars,
-        },
-    ];
+    for(let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
+        daytimeHours.push({
+            startTime: new Date(sunriseTime.getTime() + (daytimeHourTime * i)),
+            endTime: new Date(sunriseTime.getTime() + (daytimeHourTime * (i+1))),
+            planet
+        });
+        planet = ((planet + 1) % getNumOfPlanets());
+    }
+
+    return daytimeHours;
 }
 
 export function getNumOfPlanets(): number {
