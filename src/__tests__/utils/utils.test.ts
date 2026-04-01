@@ -19,11 +19,11 @@ describe('calculateDaytimeAndNighttimeHourLengths function', () => {
 
 describe('generatePlanetaryHours function', () => {
     const currentDate = new Date("March 25, 2026 06:55:00");
-    const daytimeHourTime = 61.833333333333336;
+    const hourTime = 61.833333333333336;
 
     test('expect the first hour to match the planetary day, and to increment and wrap around again from there (i.e. if Mercury is first day, then the Moon is next, and then Saturn, etc.', () => {
         let { planet } = DAYS_OF_WEEK[currentDate.getDay()];
-        const daytimeHours = generatePlanetaryHours(currentDate, daytimeHourTime);
+        const daytimeHours = generatePlanetaryHours(currentDate, hourTime);
         
         const planetResults = [
             Planet.Mercury,
@@ -49,7 +49,7 @@ describe('generatePlanetaryHours function', () => {
     });
 
     test('startTime should be less than endTime for all given hours', () => {
-        const daytimeHours = generatePlanetaryHours(currentDate, daytimeHourTime);
+        const daytimeHours = generatePlanetaryHours(currentDate, hourTime);
 
         expect.assertions(NUM_OF_PLANETARY_HOURS);
 
@@ -59,7 +59,7 @@ describe('generatePlanetaryHours function', () => {
     });
 
     test('endTime of previous hour should match startTime of next hour', () => {
-        const daytimeHours = generatePlanetaryHours(currentDate, daytimeHourTime);
+        const daytimeHours = generatePlanetaryHours(currentDate, hourTime);
 
         expect.assertions(NUM_OF_PLANETARY_HOURS - 1);
 
@@ -73,7 +73,7 @@ describe('generatePlanetaryHours function', () => {
 
     test('should be able to update the planet of the initial planetary hour, and the circuit of the following planets should reflect this.', () => {
         let planet = Planet.Sun;
-        const daytimeHours = generatePlanetaryHours(currentDate, daytimeHourTime, true);
+        const daytimeHours = generatePlanetaryHours(currentDate, hourTime, true);
 
         const planetResults = [
             Planet.Sun,
