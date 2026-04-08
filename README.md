@@ -28,7 +28,7 @@ i.e. (Using today March 25, 2026 in Philadelphia, PA) If sunrise is at 6:55 am a
 We can then use these calculations to generate the planetary hours for this day for both the daytime and nighttime. Since it is a Wednesday, this would mean that the first planetary hour is associated with Mercury. With each passing hour, we move to the next body. This movement is ordered from the slowest to the fasted moving body from our point of view on Earth (Saturn -> Jupiter -> Mars -> Sun -> Venus -> Mercury -> Moon), and loops back around. So we can then render an hourly time table.
 ```
 
-## Daytime Hours (March 25, 2026)
+## Daytime Hours (Wednesday, March 25, 2026)
 
 | Time Frame | Planetary Hour |
 | ---------- | -------------- |
@@ -45,7 +45,7 @@ We can then use these calculations to generate the planetary hours for this day 
 | 5:13pm - 6:15pm | Jupiter |
 | 6:15pm - 7:17pm | Mars |
 
-## Nighttime Hours (March 25, 2026)
+## Nighttime Hours (Wednesday, March 25, 2026)
 
 | Time Frame | Planetary Hour |
 | ---------- | -------------- |
