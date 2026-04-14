@@ -1,6 +1,7 @@
 import { DAYS_OF_WEEK, MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
 import { Planet } from "./enums";
 import { HourLengths, PlanetaryHour } from "./interfaces";
+import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunsetTime: Date): HourLengths {
     const daytimeSpan = (sunsetTime.getTime() - sunriseTime.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
@@ -23,9 +24,9 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
 */
 export function generatePlanetaryHours(startTime: Date, hourTime: number, isNight?: boolean): PlanetaryHour[] {
     const daytimeHours : PlanetaryHour[] = [];
-    let planet: Planet;
+    let planet: PlanetaryInfo;
     if (isNight) {
-        planet = (DAYS_OF_WEEK[startTime.getDay()].planet + NUM_OF_PLANETARY_HOURS) % getNumOfPlanets();
+        planet = PlanetaryInfo.getPlanetaryInfo((DAYS_OF_WEEK[startTime.getDay()].planet.planet + NUM_OF_PLANETARY_HOURS) % PlanetaryInfo.getNumOfPlanets());
     } else {
         planet = DAYS_OF_WEEK[startTime.getDay()].planet;
     }
@@ -36,7 +37,7 @@ export function generatePlanetaryHours(startTime: Date, hourTime: number, isNigh
             endTime: new Date(startTime.getTime() + (hourTime * (i+1))),
             planet
         });
-        planet = ((planet + 1) % getNumOfPlanets());
+        planet = planet.getNextPlanet();
     }
 
     return daytimeHours;

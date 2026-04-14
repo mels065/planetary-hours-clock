@@ -1,8 +1,9 @@
 import { Planet, DayOfWeek } from "./enums";
+import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export interface DayOfWeekObj {
     name: DayOfWeek;
-    planet: Planet;
+    planet: PlanetaryInfo;
 }
 
 export interface HourLengths {
@@ -13,5 +14,10 @@ export interface HourLengths {
 export interface PlanetaryHour {
     startTime: Date;
     endTime: Date;
-    planet: Planet;
+    planet: PlanetaryInfo;
+}
+
+export interface PlanetaryDate {
+    date: Date;
+    dayOfWeek: DayOfWeekObj;
 }

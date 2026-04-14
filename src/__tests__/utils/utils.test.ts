@@ -1,9 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, getNumOfPlanets } from "@/utils/utils";
+import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours } from "@/utils/utils";
 
-import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
+import { NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
 import { Planet } from "@/utils/enums";
 import { HourLengths } from "@/utils/interfaces";
+import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 describe('calculateDaytimeAndNighttimeHourLengths function', () => {
     test('calculates appropriate day and night hour lengths', () => {
@@ -22,7 +23,6 @@ describe('generatePlanetaryHours function', () => {
     const hourTime = 61.833333333333336;
 
     test('expect the first hour to match the planetary day, and to increment and wrap around again from there (i.e. if Mercury is first day, then the Moon is next, and then Saturn, etc.', () => {
-        let { planet } = DAYS_OF_WEEK[currentDate.getDay()];
         const daytimeHours = generatePlanetaryHours(currentDate, hourTime);
         
         const planetResults = [
@@ -39,12 +39,12 @@ describe('generatePlanetaryHours function', () => {
             Planet.Jupiter,
             Planet.Mars,
         ]
+
         expect.assertions(NUM_OF_PLANETARY_HOURS);
 
         for (let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
-            let { planet: p } = daytimeHours[i];
-            expect(Planet[p]).toEqual(Planet[planetResults[i]]);
-            planet = (planet + 1) % getNumOfPlanets();
+            const { planet: p } = daytimeHours[i];
+            expect(p).toEqual(PlanetaryInfo.getPlanetaryInfo(planetResults[i]));
         }
     });
 
@@ -72,7 +72,7 @@ describe('generatePlanetaryHours function', () => {
     });
 
     test('should be able to update the planet of the initial planetary hour, and the circuit of the following planets should reflect this.', () => {
-        let planet = Planet.Sun;
+        let planet: PlanetaryInfo = PlanetaryInfo.getPlanetaryInfo(Planet.Sun);
         const daytimeHours = generatePlanetaryHours(currentDate, hourTime, true);
 
         const planetResults = [
@@ -92,9 +92,9 @@ describe('generatePlanetaryHours function', () => {
         expect.assertions(NUM_OF_PLANETARY_HOURS);
 
         for (let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
-            let { planet: p } = daytimeHours[i];
-            expect(Planet[p]).toEqual(Planet[planet]);
-            planet = (planet + 1) % getNumOfPlanets();
+            const { planet: p } = daytimeHours[i];
+            expect(p.planet).toEqual(planet.planet);
+            planet = planet.getNextPlanet();
         }
     });
 });

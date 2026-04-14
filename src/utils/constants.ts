@@ -1,34 +1,35 @@
 import { Planet, DayOfWeek } from "./enums";
 import { DayOfWeekObj } from "./interfaces";
+import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export const DAYS_OF_WEEK: DayOfWeekObj[] = [
     {
         name: DayOfWeek.Sunday,
-        planet: Planet.Sun
+        planet: new PlanetaryInfo(Planet.Sun, "☉"),
     },
     {
         name: DayOfWeek.Monday,
-        planet: Planet.Moon
+        planet: new PlanetaryInfo(Planet.Moon, "☽"),
     },
     {
         name: DayOfWeek.Tuesday,
-        planet: Planet.Mars
+        planet: new PlanetaryInfo(Planet.Mars, "♂"),
     },
     {
         name: DayOfWeek.Wednesday,
-        planet: Planet.Mercury
+        planet: new PlanetaryInfo(Planet.Mercury, "☿"),
     },
     {
         name: DayOfWeek.Thursday,
-        planet: Planet.Jupiter
+        planet: new PlanetaryInfo(Planet.Jupiter, "♃"),
     },
     {
         name: DayOfWeek.Friday,
-        planet: Planet.Venus
+        planet: new PlanetaryInfo(Planet.Venus, "♀"),
     },
     {
         name: DayOfWeek.Saturday,
-        planet: Planet.Saturn
+        planet: new PlanetaryInfo(Planet.Saturn, "♄"),
     },
 ]
 
