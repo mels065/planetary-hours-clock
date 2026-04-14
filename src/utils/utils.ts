@@ -1,3 +1,4 @@
+import { MeridiemIndicator } from "./types";
 import { DAYS_OF_WEEK, MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
 import { Planet, DayOfWeek, Month } from "./enums";
 import { HourLengths, PlanetaryHour, PlanetaryDate } from "./interfaces";
@@ -53,6 +54,33 @@ export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
     return `${dayOfWeek} (${planetarySigil}), ${month} ${day}, ${year}`
 }
 
-export function getNumOfPlanets(): number {
-    return Math.floor(Object.keys(Planet).length / 2);
+export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
+    const { startTime, endTime, planet } = planetaryHour
+
+    const planetName = Planet[planet.planet];
+    const planetarySigil = planet.sigil;
+    const formattedStartTime = createTimeString(startTime);
+    const formattedEndTime = createTimeString(endTime);
+
+
+    return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
+}
+
+function createTimeString(date: Date) {
+    let hour = date.getHours();
+    const minutes = date.getMinutes();
+
+    let period: MeridiemIndicator = "am";
+
+    if (hour === 0) {
+        hour = 12;
+    } else if (hour >= 12) {
+        period = "pm";
+
+        if (hour >= 13) {
+            hour -= 12;
+        }
+    }
+
+    return `${hour}:${minutes.toString().padStart(2, "0")}${period}`;
 }
