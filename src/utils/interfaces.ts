@@ -1,4 +1,4 @@
-import { Planet, DayOfWeek } from "./enums";
+import { DayOfWeek } from "./enums";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export interface DayOfWeekObj {

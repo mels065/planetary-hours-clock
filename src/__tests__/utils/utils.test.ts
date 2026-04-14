@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours } from "@/utils/utils";
+import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, renderCurrentDate } from "@/utils/utils";
 
-import { NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
-import { Planet } from "@/utils/enums";
-import { HourLengths } from "@/utils/interfaces";
+import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
+import { DayOfWeek, Planet } from "@/utils/enums";
+import { HourLengths, PlanetaryDate } from "@/utils/interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 describe('calculateDaytimeAndNighttimeHourLengths function', () => {
@@ -72,7 +72,6 @@ describe('generatePlanetaryHours function', () => {
     });
 
     test('should be able to update the planet of the initial planetary hour, and the circuit of the following planets should reflect this.', () => {
-        let planet: PlanetaryInfo = PlanetaryInfo.getPlanetaryInfo(Planet.Sun);
         const daytimeHours = generatePlanetaryHours(currentDate, hourTime, true);
 
         const planetResults = [
@@ -93,8 +92,21 @@ describe('generatePlanetaryHours function', () => {
 
         for (let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
             const { planet: p } = daytimeHours[i];
-            expect(p.planet).toEqual(planet.planet);
-            planet = planet.getNextPlanet();
+            expect(p.planet).toEqual(planetResults[i]);
         }
+    });
+});
+
+describe('renderCurrentDate', () => {
+    const date = new Date("March 25, 2026 06:55:00");
+        const planetaryDate: PlanetaryDate = {
+            date,
+            dayOfWeek: DAYS_OF_WEEK[date.getDay()]
+        }
+
+    test('renders the correct date string', () => {
+        const expectedString = "Wednesday (☿), March 25, 2026";
+        
+        expect(renderCurrentDate(planetaryDate)).toEqual(expectedString);
     });
 });

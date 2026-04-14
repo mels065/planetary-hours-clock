@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
 
 const clockSlice = createSlice({
     name: 'clock',
@@ -16,6 +17,11 @@ const clockSlice = createSlice({
         }
     }
 });
+
+export type ClockState = {
+    currentDate: PlanetaryDate | null,
+    currentHour: PlanetaryHour | null
+}
 
 export const { updateClock } = clockSlice.actions;
 export default clockSlice.reducer;
