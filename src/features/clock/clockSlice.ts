@@ -1,14 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
+
+const initialState: ClockState = { 
+    currentDate: null,
+    currentHour: null,
+};
 
 const clockSlice = createSlice({
     name: 'clock',
-    initialState: { 
-        currentDate: null,
-        currentHour: null,
-    },
+    initialState,
     reducers: {
-        updateClock(state, action) {
+        updateClock(state, action: PayloadAction<ClockState>) {
             return {
                 ...state,
                 currentDate: action.payload.currentDate,
@@ -18,9 +20,9 @@ const clockSlice = createSlice({
     }
 });
 
-export type ClockState = {
-    currentDate: PlanetaryDate | null,
-    currentHour: PlanetaryHour | null
+export interface ClockState  {
+    currentDate: string | null;
+    currentHour: string | null
 }
 
 export const { updateClock } = clockSlice.actions;
