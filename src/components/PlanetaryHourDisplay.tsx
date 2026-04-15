@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateClock, ClockState } from "@/features/clock/clockSlice";
 import { RootState, AppDispatch } from "../store";
-import { Planet, DayOfWeek, Month } from "@/utils/enums";
-import PlanetaryInfo from "@/models/PlanetaryInfo";
 import { renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 
