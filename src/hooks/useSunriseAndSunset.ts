@@ -6,7 +6,7 @@ import { updateClock, ClockState } from "@/features/clock/clockSlice";
 import { RootState, AppDispatch } from "../store";
 import { renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
 
-export default function useSunriseAndSunset(): RootState {
+export default function useSunriseAndSunset(): { clock: ClockState } {
     /* TODO: 1. Check if data in localstorage is current to the day, meaning that:
                 - It is currently the same day as the day saved in localstore.
                 - It is the next day, but it is before sunrise.
