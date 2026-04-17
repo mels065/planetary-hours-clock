@@ -2,29 +2,15 @@
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 import { updateClock, ClockState } from "@/features/clock/clockSlice";
 import { RootState, AppDispatch } from "../store";
 import { renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 
 export default function PlanetaryHourDisplay() {
-    const { currentDate, currentHour } = useSelector<RootState, ClockState>(state => state.clock);
-    const dispatch = useDispatch<AppDispatch>();
-
-    useEffect(() => {
-        const date = new Date("March 25, 2026 06:55:00");
-        dispatch(updateClock({
-            currentDate: renderCurrentDate({
-                date,
-                dayOfWeek: DAYS_OF_WEEK[date.getDay()]
-            }),
-            currentHour: renderPlanetaryHour({
-                startTime: new Date("March 25, 2026 06:55:00"),
-                endTime: new Date("March 25, 2026 07:56:00"),
-                planet: DAYS_OF_WEEK[date.getDay()].planet
-            })
-        }))
-    }, [dispatch]);
+    const { clock } = useSunriseAndSunset();
+    const { currentDate, currentHour } = clock;
 
     return (
         <>
