@@ -24,7 +24,7 @@ export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunse
     isNight?: boolean - Optional boolean to indicate if night hours (effects starting planet).
 */
 export function generatePlanetaryHours(startTime: Date, hourTime: number, isNight?: boolean): PlanetaryHour[] {
-    const daytimeHours : PlanetaryHour[] = [];
+    const hours : PlanetaryHour[] = [];
     let planet: PlanetaryInfo;
     if (isNight) {
         planet = PlanetaryInfo.getPlanetaryInfo((DAYS_OF_WEEK[startTime.getDay()].planet.planet + NUM_OF_PLANETARY_HOURS) % PlanetaryInfo.getNumOfPlanets());
@@ -32,16 +32,18 @@ export function generatePlanetaryHours(startTime: Date, hourTime: number, isNigh
         planet = DAYS_OF_WEEK[startTime.getDay()].planet;
     }
 
+    const hourTimeMs = hourTime * 60 * 1000;
     for(let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
-        daytimeHours.push({
-            startTime: new Date(startTime.getTime() + (hourTime * i)),
-            endTime: new Date(startTime.getTime() + (hourTime * (i+1))),
+        hours.push({
+            startTime: new Date(startTime.getTime() + (hourTimeMs * i)),
+            endTime: new Date(startTime.getTime() + (hourTimeMs * (i+1))),
             planet
         });
         planet = planet.getNextPlanet();
     }
+    console.log(hours)
 
-    return daytimeHours;
+    return hours;
 }
 
 export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
