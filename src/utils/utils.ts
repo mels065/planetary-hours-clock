@@ -68,6 +68,22 @@ export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
     return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
 }
 
+export function renderSunriseSunsetApiUrl(lat: number, lon: number): string {
+    return `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`;
+}
+
+export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): PlanetaryHour | null {
+    const currentDate = new Date();
+    
+    for (const hour of planetaryHours) {
+        if (hour.startTime <= currentDate && hour.endTime > currentDate) {
+            return hour;
+        }
+    }
+    
+    return null;
+}
+
 function createTimeString(date: Date) {
     let hour = date.getHours();
     const minutes = date.getMinutes();
