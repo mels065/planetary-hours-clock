@@ -21,3 +21,11 @@ export interface PlanetaryDate {
     date: Date;
     dayOfWeek: DayOfWeekObj;
 }
+
+export interface SunriseSunsetApiResponse {
+    results: {
+        sunrise: string;
+        sunset: string;
+    },
+    status: "OK" | "INVALID_REQUEST" | "INVALID_DATE" | "UNKNOWN_ERROR" | "INVALID_TZID"
+}

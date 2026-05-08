@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 import { Planet } from "@/utils/enums";
 import { DAYS_OF_WEEK } from "@/utils/constants";
+import { PlanetaryHour, SunriseSunsetApiResponse } from "@/utils/interfaces";
 import { updateClock, ClockState } from "@/features/clock/clockSlice";
 import { RootState, AppDispatch } from "../store";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import { 
+    calculateDaytimeAndNighttimeHourLengths,
+    generatePlanetaryHours,
+    getCurrentPlanetaryHour,
+    renderCurrentDate,
+    renderPlanetaryHour,
+    renderSunriseSunsetApiUrl,
+} from "@/utils/utils";
 
 export default function useSunriseAndSunset() {
     /* TODO: 1. Check if data in localstorage is current to the day, meaning that:
@@ -18,34 +27,47 @@ export default function useSunriseAndSunset() {
     const dispatch = useDispatch<AppDispatch>();
 
     const handleClock = async () => {
-        setIsClockLoading(true);
-        try {
-            const date = new Date("March 25, 2026 06:55:00");
-            const sunset = new Date("March 25, 2026 19:17:00");
+        navigator.geolocation.getCurrentPosition(async position => {
+            const { coords: { latitude, longitude } } = position;
+            setIsClockLoading(true);
+            try {
+                const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude);
+                const res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
+                if (res.data.status !== 'OK') {
+                    throw new Error(`Response error: ${res.data.status}`);
+                }
+                const { 
+                    sunrise: sunriseTimestamp,
+                    sunset: sunsetTimestamp
+                } = res.data.results;
+                const date = new Date(sunriseTimestamp);
+                const sunset = new Date(sunsetTimestamp);
 
-            const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
-                date,
-                sunset,
-            );
-
-            dispatch(updateClock({
-                currentDate: renderCurrentDate({
+                const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
                     date,
-                    dayOfWeek: DAYS_OF_WEEK[date.getDay()]
-                }),
-                currentHour: renderPlanetaryHour({
-                    startTime: new Date("March 25, 2026 06:55:00"),
-                    endTime: new Date("March 25, 2026 07:56:00"),
-                    planet: DAYS_OF_WEEK[date.getDay()].planet
-                }),
-                dayHours: generatePlanetaryHours(date, daytimeHourTime),
-                nightHours: generatePlanetaryHours(sunset, nighttimeHourTime, true),
-            }))
-        } catch (error) {
+                    sunset,
+                );
 
-        } finally {
-            setIsClockLoading(false);
-        }
+                const dayHours = generatePlanetaryHours(date, daytimeHourTime);
+                const nightHours = generatePlanetaryHours(sunset, nighttimeHourTime, true);
+
+                const currentHour = getCurrentPlanetaryHour([...dayHours, ...nightHours]) as PlanetaryHour;
+
+                dispatch(updateClock({
+                    currentDate: renderCurrentDate({
+                        date,
+                        dayOfWeek: DAYS_OF_WEEK[date.getDay()]
+                    }),
+                    currentHour: renderPlanetaryHour(currentHour),
+                    dayHours,
+                    nightHours,
+                }))
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsClockLoading(false);
+            }
+        })
     };
     
     return {
