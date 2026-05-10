@@ -41,7 +41,6 @@ export function generatePlanetaryHours(startTime: Date, hourTime: number, isNigh
         });
         planet = planet.getNextPlanet();
     }
-    console.log(hours)
 
     return hours;
 }
