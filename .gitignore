@@ -43,5 +43,3 @@ next-env.d.ts
 .swc
 
 TASKS.md
-
-package-lock.json
