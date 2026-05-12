@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react";
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours } from "@/utils/utils";
 import PlanetaryHourColumn from "./PlanetaryHourColumn";

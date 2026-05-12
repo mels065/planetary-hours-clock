@@ -6,6 +6,7 @@
 
 @theme inline {
   /* Code here */
+  --font-display: "Satoshi", "sans-serif";
 }
 
 @media (prefers-color-scheme: dark) {

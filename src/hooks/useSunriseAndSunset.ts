@@ -1,78 +1,55 @@
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { SunriseSunsetApiResponse } from "@/utils/interfaces";
+import { renderSunriseSunsetApiUrl } from "@/utils/utils";
 import axios from "axios";
-import { Planet } from "@/utils/enums";
-import { DAYS_OF_WEEK } from "@/utils/constants";
-import { PlanetaryHour, SunriseSunsetApiResponse } from "@/utils/interfaces";
-import { updateClock, ClockState } from "@/features/clock/clockSlice";
-import { RootState, AppDispatch } from "../store";
-import { 
-    calculateDaytimeAndNighttimeHourLengths,
-    generatePlanetaryHours,
-    getCurrentPlanetaryHour,
-    renderCurrentDate,
-    renderPlanetaryHour,
-    renderSunriseSunsetApiUrl,
-} from "@/utils/utils";
 
-export default function useSunriseAndSunset() {
-    /* TODO: 1. Check if data in localstorage is current to the day, meaning that:
-                - It is currently the same day as the day saved in localstore.
-                - It is the next day, but it is before sunrise.
-                If none of these conditions are met, the data will need to be updated with an API call
-            2. If changed, set new sunrise, sunset, and day, and return data
-    */
-    const [isClockLoading, setIsClockLoading] = useState<boolean>(true);
-    const clock = useSelector<RootState, ClockState>(state => state.clock);
-    const dispatch = useDispatch<AppDispatch>();
 
-    const handleClock = async () => {
-        navigator.geolocation.getCurrentPosition(async position => {
-            const { coords: { latitude, longitude } } = position;
-            setIsClockLoading(true);
-            try {
-                const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude);
-                const res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
-                if (res.data.status !== 'OK') {
-                    throw new Error(`Response error: ${res.data.status}`);
-                }
-                const { 
-                    sunrise: sunriseTimestamp,
-                    sunset: sunsetTimestamp
-                } = res.data.results;
-                const date = new Date(sunriseTimestamp);
-                const sunset = new Date(sunsetTimestamp);
+type SunriseSunset = {
+    sunrise: Date | null,
+    sunset: Date | null
+}
 
-                const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
-                    date,
-                    sunset,
-                );
+export default function useSunriseAndSunset(): SunriseSunset {
+    const [sunrise, setSunrise] = useState<Date | null>(null);
+    const [sunset, setSunset] = useState<Date | null>(null);
 
-                const dayHours = generatePlanetaryHours(date, daytimeHourTime);
-                const nightHours = generatePlanetaryHours(sunset, nighttimeHourTime, true);
+    useEffect(() => {
+        (async () => {
+            const savedSunriseData: string | null = localStorage.getItem('sunrise');
+            const savedSunsetData: string | null = localStorage.getItem('sunset');
 
-                const currentHour = getCurrentPlanetaryHour([...dayHours, ...nightHours]) as PlanetaryHour;
+            if ((!savedSunriseData || savedSunriseData.length === 0) || (!savedSunsetData || savedSunsetData.length === 0)) {
+                navigator.geolocation.getCurrentPosition(async position => {
+                        const { coords: { latitude, longitude } } = position;
 
-                dispatch(updateClock({
-                    currentDate: renderCurrentDate({
-                        date,
-                        dayOfWeek: DAYS_OF_WEEK[date.getDay()]
-                    }),
-                    currentHour: renderPlanetaryHour(currentHour),
-                    dayHours,
-                    nightHours,
-                }))
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsClockLoading(false);
+                        const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude);
+                        try {
+                            const res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
+                            if (res.data.status !== 'OK') {
+                                throw new Error(`Response error: ${res.data.status}`)
+                            }
+                            const {
+                                sunrise: sunriseTimestamp,
+                                sunset: sunsetTimestamp
+                            } = res.data.results;
+                            const sr = new Date(sunriseTimestamp);
+                            const ss = new Date(sunsetTimestamp);
+
+                            localStorage.setItem('sunrise', JSON.stringify(sr));
+                            localStorage.setItem('sunset', JSON.stringify(ss));
+                            
+                            setSunrise(sr);
+                            setSunset(ss);
+                        } catch (err) {
+                            throw err;
+                        }
+                    })
+            } else {
+                setSunrise(JSON.parse(savedSunriseData) as Date);
+                setSunset(JSON.parse(savedSunsetData) as Date);
             }
-        })
-    };
-    
-    return {
-        isClockLoading,
-        clock,
-        handleClock
-    };
+        })();
+    }, []);
+
+    return { sunrise, sunset } as SunriseSunset;
 }
