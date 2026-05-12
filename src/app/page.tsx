@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <div>
       <main>
-        <h1 className="font-display">Planetary Hour Clock</h1>
+        <h1>Planetary Hour Clock</h1>
         {
           isClockLoading && (
             <LoadingSpinner text="Fetching sunrise and sunset times" size="xl" fullScreen={true} />
