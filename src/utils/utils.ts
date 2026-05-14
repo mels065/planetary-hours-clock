@@ -83,7 +83,15 @@ export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): Planet
     return null;
 }
 
+// type PlanetaryHourJSON {
+
+// }
+// export function jsonifyPlanetaryHour(planetaryHour: PlanetaryHour): string {
+//     return 
+// }
+
 function createTimeString(date: Date) {
+    console.log(date);
     let hour = date.getHours();
     const minutes = date.getMinutes();
 

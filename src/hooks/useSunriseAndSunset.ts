@@ -5,18 +5,18 @@ import axios from "axios";
 
 
 type SunriseSunset = {
-    sunrise: Date | null,
-    sunset: Date | null
+    sunriseTimestamp: string,
+    sunsetTimestamp: string
 }
 
 export default function useSunriseAndSunset(): SunriseSunset {
-    const [sunrise, setSunrise] = useState<Date | null>(null);
-    const [sunset, setSunset] = useState<Date | null>(null);
+    const [sunriseTimestamp, setSunriseTimestamp] = useState<string>("");
+    const [sunsetTimestamp, setSunsetTimestamp] = useState<string>("");
 
     useEffect(() => {
         (async () => {
-            const savedSunriseData: string | null = localStorage.getItem('sunrise');
-            const savedSunsetData: string | null = localStorage.getItem('sunset');
+            const savedSunriseData: string | null = localStorage.getItem('sunriseTimestamp');
+            const savedSunsetData: string | null = localStorage.getItem('sunsetTimestamp');
 
             if ((!savedSunriseData || savedSunriseData.length === 0) || (!savedSunsetData || savedSunsetData.length === 0)) {
                 navigator.geolocation.getCurrentPosition(async position => {
@@ -29,27 +29,25 @@ export default function useSunriseAndSunset(): SunriseSunset {
                                 throw new Error(`Response error: ${res.data.status}`)
                             }
                             const {
-                                sunrise: sunriseTimestamp,
-                                sunset: sunsetTimestamp
+                                sunrise,
+                                sunset,
                             } = res.data.results;
-                            const sr = new Date(sunriseTimestamp);
-                            const ss = new Date(sunsetTimestamp);
 
-                            localStorage.setItem('sunrise', JSON.stringify(sr));
-                            localStorage.setItem('sunset', JSON.stringify(ss));
+                            localStorage.setItem('sunriseTimestamp', sunrise);
+                            localStorage.setItem('sunsetTimestamp', sunset);
                             
-                            setSunrise(sr);
-                            setSunset(ss);
+                            setSunriseTimestamp(sunrise);
+                            setSunsetTimestamp(sunset);
                         } catch (err) {
                             throw err;
                         }
                     })
             } else {
-                setSunrise(JSON.parse(savedSunriseData) as Date);
-                setSunset(JSON.parse(savedSunsetData) as Date);
+                setSunriseTimestamp(savedSunriseData);
+                setSunsetTimestamp(savedSunsetData);
             }
         })();
     }, []);
 
-    return { sunrise, sunset } as SunriseSunset;
+    return { sunriseTimestamp, sunsetTimestamp } as SunriseSunset;
 }

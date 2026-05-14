@@ -12,12 +12,16 @@ import { updateClock } from "@/features/clock/clockSlice";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 
 export default function Home() {
-  const { sunrise, sunset } = useSunriseAndSunset();
+  const { sunriseTimestamp, sunsetTimestamp } = useSunriseAndSunset();
   const dispatch = useDispatch<AppDispatch>();
 
-  const isClockLoading = !sunrise || !sunset;
+  const isClockLoading = sunriseTimestamp.length === 0 || sunsetTimestamp.length === 0;
 
-  if (sunrise && sunset) {
+  if (sunriseTimestamp.length > 0 && sunsetTimestamp.length > 0) {
+    const sunrise = new Date(sunriseTimestamp);
+    const sunset = new Date(sunsetTimestamp);
+    console.log(sunriseTimestamp, sunrise)
+
     const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
         sunrise,
         sunset,
@@ -34,8 +38,8 @@ export default function Home() {
             dayOfWeek: DAYS_OF_WEEK[sunrise.getDay()]
         }),
         currentHour,
-        dayHours,
-        nightHours,
+        dayHours: JSON.stringify(dayHours),
+        nightHours: JSON.stringify(nightHours),
     }))
   }
 
