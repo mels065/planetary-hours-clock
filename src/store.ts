@@ -5,7 +5,13 @@ export const makeStore = () => {
     return configureStore({
         reducer: {
             clock: clockReducer,
-        }
+        },
+        middleware: getDefaultMiddleware =>
+            getDefaultMiddleware({
+                serializableCheck: {
+                    ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE']
+                }
+            })
     });
 }
 

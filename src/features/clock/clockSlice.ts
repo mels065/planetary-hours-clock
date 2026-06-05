@@ -4,8 +4,8 @@ import { PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
 const initialState: ClockState = { 
     currentDate: null,
     currentHour: null,
-    dayHours: [],
-    nightHours: [],
+    dayHours: JSON.stringify([]),
+    nightHours: JSON.stringify([]),
 };
 
 const clockSlice = createSlice({
@@ -27,8 +27,8 @@ const clockSlice = createSlice({
 export interface ClockState  {
     currentDate: string | null;
     currentHour: string | null,
-    dayHours: PlanetaryHour[],
-    nightHours: PlanetaryHour[],
+    dayHours: string,
+    nightHours: string,
 }
 
 export const { updateClock } = clockSlice.actions;

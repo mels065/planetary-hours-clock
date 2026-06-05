@@ -60,8 +60,8 @@ export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
 
     const planetName = Planet[planet.planet];
     const planetarySigil = planet.sigil;
-    const formattedStartTime = createTimeString(startTime);
-    const formattedEndTime = createTimeString(endTime);
+    const formattedStartTime = createTimeString(new Date(startTime));
+    const formattedEndTime = createTimeString(new Date(endTime));
 
 
     return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;

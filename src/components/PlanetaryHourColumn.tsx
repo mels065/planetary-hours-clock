@@ -8,7 +8,7 @@ export default function PlanetaryHourColumn({ planetaryHours, isNight }: { plane
             {
                 planetaryHours.map(hour => {
                     return <PlanetaryHourColumnDataRow
-                        key={hour.toString()}
+                        key={JSON.stringify(hour)}
                         planetaryHour={hour}
                         isInPast={hour.endTime <= new Date()}
                     />
