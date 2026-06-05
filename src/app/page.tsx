@@ -20,7 +20,6 @@ export default function Home() {
   if (sunriseTimestamp.length > 0 && sunsetTimestamp.length > 0) {
     const sunrise = new Date(sunriseTimestamp);
     const sunset = new Date(sunsetTimestamp);
-    console.log(sunriseTimestamp, sunrise)
 
     const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
         sunrise,

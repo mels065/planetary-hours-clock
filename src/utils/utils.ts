@@ -60,8 +60,8 @@ export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
 
     const planetName = Planet[planet.planet];
     const planetarySigil = planet.sigil;
-    const formattedStartTime = createTimeString(startTime);
-    const formattedEndTime = createTimeString(endTime);
+    const formattedStartTime = createTimeString(new Date(startTime));
+    const formattedEndTime = createTimeString(new Date(endTime));
 
 
     return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
@@ -83,15 +83,7 @@ export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): Planet
     return null;
 }
 
-// type PlanetaryHourJSON {
-
-// }
-// export function jsonifyPlanetaryHour(planetaryHour: PlanetaryHour): string {
-//     return 
-// }
-
 function createTimeString(date: Date) {
-    console.log(date);
     let hour = date.getHours();
     const minutes = date.getMinutes();
 
