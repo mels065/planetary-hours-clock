@@ -14,7 +14,7 @@ export default function PlanetaryHourTimeTable() {
     const nightHours = JSON.parse(nightHoursJson) as PlanetaryHour[];
 
     return ( 
-        <div>
+        <div className="flex justify-center p-2 gap-20">
             <PlanetaryHourColumn planetaryHours={dayHours} />
             <PlanetaryHourColumn planetaryHours={nightHours} isNight={true} />
         </div>
