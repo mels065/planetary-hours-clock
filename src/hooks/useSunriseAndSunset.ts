@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { SunriseSunsetApiResponse } from "@/utils/interfaces";
-import { renderSunriseSunsetApiUrl } from "@/utils/utils";
+import { renderSunriseSunsetApiUrl, isNewDay } from "@/utils/utils";
 import axios from "axios";
 
 
@@ -18,7 +18,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
             const savedSunriseData: string | null = localStorage.getItem('sunriseTimestamp');
             const savedSunsetData: string | null = localStorage.getItem('sunsetTimestamp');
 
-            if ((!savedSunriseData || savedSunriseData.length === 0) || (!savedSunsetData || savedSunsetData.length === 0)) {
+            if ((!savedSunriseData || savedSunriseData.length === 0) || (!savedSunsetData || savedSunsetData.length === 0) || isNewDay(savedSunriseData)) {
                 navigator.geolocation.getCurrentPosition(async position => {
                         const { coords: { latitude, longitude } } = position;
 
