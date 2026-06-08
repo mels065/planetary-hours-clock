@@ -13,7 +13,7 @@ export default function PlanetaryHourDisplay() {
         <>
             {
                 currentDate && currentHour && (
-                    <div>
+                    <div className="p-2 text-center text-xl font-bold">
                         <div>{currentDate}</div>
                         <div>{currentHour}</div>
                     </div>
