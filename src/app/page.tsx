@@ -32,10 +32,7 @@ export default function Home() {
     const currentHour = renderPlanetaryHour(getCurrentPlanetaryHour([...dayHours, ...nightHours]) as PlanetaryHour);
 
     dispatch(updateClock({
-        currentDate: renderCurrentDate({
-            date: sunrise,
-            dayOfWeek: DAYS_OF_WEEK[sunrise.getDay()]
-        }),
+        currentDate: sunrise.toDateString(),
         currentHour,
         dayHours: JSON.stringify(dayHours),
         nightHours: JSON.stringify(nightHours),
