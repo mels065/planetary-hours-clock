@@ -65,3 +65,6 @@ We can then use these calculations to generate the planetary hours for this day 
 The clever thing about how this is crafted is that the sunrise hour corresponding with the next day will land on its associated planet. So the next day at sunrise, the planetary hour will be Jupiter!
 
 This project will display the current planetary hour, and show all the planetary hours corresponding with the current day.
+
+## Acknowledgement
+This software utilizes the [`Sunrise Sunset API`](https://sunrise-sunset.org/api)
