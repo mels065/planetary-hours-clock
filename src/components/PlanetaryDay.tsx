@@ -2,7 +2,6 @@
 
 import PlanetarySigilIcon from "./PlanetarySigilIcon";
 import { useSelector } from "react-redux";
-import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 import { RootState } from "@/store";
 import { ClockState } from "@/features/clock/clockSlice";
 import { DayOfWeek, Month } from "@/utils/enums";
@@ -23,8 +22,8 @@ export default function PlanetaryDay() {
     const year = sunrise.getFullYear();
 
     return (
-        <div className="p-2 text-center text-xl font-bold">
-            {`${dayOfWeekName}`} <PlanetarySigilIcon sigil={planetarySigil} />{` - ${month} ${day}, ${year}`}
+        <div className="p-2 text-center font-bold">
+            <span className="">{`${dayOfWeekName}`}</span> <PlanetarySigilIcon sigil={planetarySigil} size="lg" /> <span>{` - ${month} ${day}, ${year}`}</span>
         </div>
     );
 }
