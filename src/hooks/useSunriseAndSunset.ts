@@ -7,11 +7,13 @@ import axios from "axios";
 type SunriseSunset = {
     sunriseTimestamp: string,
     sunsetTimestamp: string
+    apiError: Error | null;
 }
 
 export default function useSunriseAndSunset(): SunriseSunset {
     const [sunriseTimestamp, setSunriseTimestamp] = useState<string>("");
     const [sunsetTimestamp, setSunsetTimestamp] = useState<string>("");
+    const [apiError, setApiError] = useState<Error | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -57,7 +59,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
                             setSunriseTimestamp(sunrise);
                             setSunsetTimestamp(sunset);
                         } catch (err) {
-                            throw err;
+                            setApiError(err as Error);
                         }
                     })
             } else {
@@ -67,5 +69,5 @@ export default function useSunriseAndSunset(): SunriseSunset {
         })();
     }, []);
 
-    return { sunriseTimestamp, sunsetTimestamp } as SunriseSunset;
+    return { sunriseTimestamp, sunsetTimestamp, apiError } as SunriseSunset;
 }
