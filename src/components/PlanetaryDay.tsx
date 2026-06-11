@@ -1,18 +1,10 @@
 "use client"
 
 import PlanetarySigilIcon from "./PlanetarySigilIcon";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { ClockState } from "@/features/clock/clockSlice";
 import { DayOfWeek, Month } from "@/utils/enums";
 import { DAYS_OF_WEEK } from "@/utils/constants";
 
-export default function PlanetaryDay() {
-    const clock = useSelector<RootState, ClockState>(state => state.clock);
-    const { currentDate } = clock;
-
-    if (!currentDate) return null;
-
+export default function PlanetaryDay({ currentDate }: { currentDate: string }) {
     const sunrise = new Date(currentDate);
     const dayOfWeek = DAYS_OF_WEEK[sunrise.getDay()];
     const dayOfWeekName = DayOfWeek[dayOfWeek.name];
@@ -22,8 +14,10 @@ export default function PlanetaryDay() {
     const year = sunrise.getFullYear();
 
     return (
-        <div className="p-2 text-center font-bold">
-            <span className="">{`${dayOfWeekName}`}</span> <PlanetarySigilIcon sigil={planetarySigil} size="lg" /> <span>{` - ${month} ${day}, ${year}`}</span>
+        <div>
+            <span>{`${dayOfWeekName} `}</span>
+            <PlanetarySigilIcon sigil={planetarySigil} size="lg" />
+            <span>{` - ${month} ${day}, ${year}`}</span>
         </div>
     );
 }

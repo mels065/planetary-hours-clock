@@ -94,7 +94,7 @@ export function isNewDay(sunriseTimestamp: string): boolean {
     return currentDate >= oneDayLaterFromSunrise;
 }
 
-function createTimeString(date: Date) {
+export function createTimeString(date: Date) {
     let hour = date.getHours();
     const minutes = date.getMinutes();
 
