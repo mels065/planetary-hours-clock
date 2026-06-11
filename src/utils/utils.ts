@@ -45,28 +45,6 @@ export function generatePlanetaryHours(startTime: Date, hourTime: number, isNigh
     return hours;
 }
 
-export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
-    const dayOfWeek = DayOfWeek[planetaryDate.dayOfWeek.name];
-    const planetarySigil = planetaryDate.dayOfWeek.planet.sigil;
-    const month = Month[planetaryDate.date.getMonth()];
-    const day = planetaryDate.date.getDate();
-    const year = planetaryDate.date.getFullYear();
-
-    return `${dayOfWeek} (${planetarySigil}), ${month} ${day}, ${year}`
-}
-
-export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
-    const { startTime, endTime, planet } = planetaryHour
-
-    const planetName = Planet[planet.planet];
-    const planetarySigil = planet.sigil;
-    const formattedStartTime = createTimeString(new Date(startTime));
-    const formattedEndTime = createTimeString(new Date(endTime));
-
-
-    return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
-}
-
 export function renderSunriseSunsetApiUrl(lat: number, lon: number): string {
     return `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`;
 }

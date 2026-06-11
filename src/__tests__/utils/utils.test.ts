@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours } from "@/utils/utils";
 
 import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
 import { DayOfWeek, Planet } from "@/utils/enums";
@@ -96,33 +96,3 @@ describe('generatePlanetaryHours function', () => {
         }
     });
 });
-
-describe('renderCurrentDate', () => {
-    const date = new Date("March 25, 2026 06:55:00");
-    const planetaryDate: PlanetaryDate = {
-        date,
-        dayOfWeek: DAYS_OF_WEEK[date.getDay()]
-    }
-
-    test('renders the correct date string', () => {
-        const expectedString = "Wednesday (☿), March 25, 2026";
-        
-        expect(renderCurrentDate(planetaryDate)).toEqual(expectedString);
-    });
-});
-
-describe('renderPlanetaryHour', () => {
-    const startTime = new Date("March 25, 2026 06:55:00");
-    const endTime = new Date("March 25, 2026 07:56:00");
-    const planetaryHour: PlanetaryHour = {
-        startTime,
-        endTime,
-        planet: PlanetaryInfo.getPlanetaryInfo(Planet.Mercury)
-    };
-
-    test('renders the correct time string', () => {
-        const expectedString = "Hour of Mercury (☿) / 6:55am - 7:56am";
-
-        expect(renderPlanetaryHour(planetaryHour)).toEqual(expectedString);
-    })
-})

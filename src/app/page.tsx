@@ -4,7 +4,7 @@ import PlanetaryHourDisplay from "@/components/PlanetaryHourDisplay";
 import PlanetaryHourTimeTable from "@/components/PlanetaryHourTimeTable";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, getCurrentPlanetaryHour, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, getCurrentPlanetaryHour } from "@/utils/utils";
 import { PlanetaryHour } from "@/utils/interfaces";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";

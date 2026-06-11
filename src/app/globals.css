@@ -4,17 +4,6 @@
   /* Code here */
 }
 
-@theme {
-  /* Code here */
-  --color-gold: #DAA428;
-  --color-silver: #DBDBDC;
-  --color-quicksilver: #889A97;
-  --color-copper: #AD6F69;
-  --color-iron: #2B3736;
-  --color-tin: #665D1E;
-  --color-lead: #212121;
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     /* Code here */
@@ -23,4 +12,14 @@
 
 body {
   /* Code here */
+}
+
+@theme {
+  --color-gold: #DAA428;
+  --color-silver: #DBDBDC;
+  --color-quicksilver: #889A97;
+  --color-copper: #AD6F69;
+  --color-iron: #2B3736;
+  --color-tin: #665D1E;
+  --color-lead: #212121;
 }

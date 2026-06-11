@@ -18,6 +18,6 @@ export default function PlanetarySigilIcon({ sigil, size="md" }: { sigil: Planet
     }
     
     return (
-        <span className={`text-${sizeMap[size]} text-${sigilColorMap[sigil]}`}>{sigil}</span>
+        <span className={`font-bold text-${sizeMap[size]} text-${sigilColorMap[sigil]}`}>{sigil}</span>
     )
 }
