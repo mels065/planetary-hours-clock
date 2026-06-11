@@ -13,7 +13,7 @@ export default function PlanetaryHourText({ planetaryHour, isInClockDisplay }: {
 
     return (
         <div>
-            <span>{`Hour of ${planetName}`}</span>
+            <span>{`Hour of ${planetName}`} </span>
             <PlanetarySigilIcon sigil={planetarySigil} size={isInClockDisplay ? "lg" : "md"} />
             <span>{` / ${formattedStartTime} - ${formattedEndTime}`}</span>
         </div>

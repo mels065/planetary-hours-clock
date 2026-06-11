@@ -1,4 +1,5 @@
 import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHourText from "./PlanetaryHourText";
 import { renderPlanetaryHour } from "@/utils/utils";
 
 export default function PlanetaryHourColumnDataRow(
@@ -7,7 +8,7 @@ export default function PlanetaryHourColumnDataRow(
     {
     return (
         <div className={isInPast ? "text-gray" : ""}>
-            {renderPlanetaryHour(planetaryHour)}
+            <PlanetaryHourText planetaryHour={planetaryHour} />
         </div>
     );
 }
