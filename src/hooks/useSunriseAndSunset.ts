@@ -15,14 +15,31 @@ export default function useSunriseAndSunset(): SunriseSunset {
 
     useEffect(() => {
         (async () => {
-            const savedSunriseData: string | null = localStorage.getItem('sunriseTimestamp');
-            const savedSunsetData: string | null = localStorage.getItem('sunsetTimestamp');
+            const savedSunriseData: string = localStorage.getItem('sunriseTimestamp') || "";
+            const savedSunsetData: string = localStorage.getItem('sunsetTimestamp') || "";
+            const savedTzid: string = localStorage.getItem('tzid') || "";
 
-            if ((!savedSunriseData || savedSunriseData.length === 0) || (!savedSunsetData || savedSunsetData.length === 0) || isNewDay(savedSunriseData)) {
+            const clientTzid = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            function IsApiCallNeeded(): boolean {
+                function isSavedSunriseDataValid() {
+                    return !savedSunriseData || savedSunriseData.length === 0;
+                }
+                function isSavedSunsetDataValid() {
+                    return !savedSunsetData || savedSunsetData.length === 0;
+                }
+                function isSavedTzidValid() {
+                    return !savedTzid || savedTzid.length === 0 || savedTzid !== clientTzid;
+                }
+
+                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid();
+            }
+
+            if (IsApiCallNeeded()) {
                 navigator.geolocation.getCurrentPosition(async position => {
                         const { coords: { latitude, longitude } } = position;
 
-                        const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude);
+                        const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid);
                         try {
                             const res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
                             if (res.data.status !== 'OK') {
@@ -35,6 +52,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
 
                             localStorage.setItem('sunriseTimestamp', sunrise);
                             localStorage.setItem('sunsetTimestamp', sunset);
+                            localStorage.setItem('tzid', clientTzid);
                             
                             setSunriseTimestamp(sunrise);
                             setSunsetTimestamp(sunset);
