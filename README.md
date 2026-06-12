@@ -67,6 +67,8 @@ The clever thing about how this is crafted is that the sunrise hour correspondin
 This project will display the current planetary hour, and show all the planetary hours corresponding with the current day.
 
 ## Demo
+**Currently in maintenance and will be online again shortly**
+
 https://blooming-earth-87705-2e4913a98dd9.herokuapp.com/
 
 ## Acknowledgement
