@@ -5,8 +5,6 @@ import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
 import { Planet } from "@/utils/enums";
 import { HourLengths, PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
-import { before, after } from "node:test";
-import { SpiedClass } from "jest-mock";
 
 describe('calculateDaytimeAndNighttimeHourLengths function', () => {
     test('calculates appropriate day and night hour lengths', () => {
