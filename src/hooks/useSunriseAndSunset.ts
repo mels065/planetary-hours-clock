@@ -34,7 +34,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
                     return !savedTzid || savedTzid.length === 0 || savedTzid !== clientTzid;
                 }
 
-                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid();
+                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid() || isNewDay(savedSunriseData);
             }
 
             if (IsApiCallNeeded()) {

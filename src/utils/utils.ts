@@ -84,13 +84,14 @@ export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): Planet
 }
 
 export function isNewDay(sunriseTimestamp: string): boolean {
-    const DAY_IN_MS = 1000 * 60 * 60 * 24 * 2;
+    const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
+    const currentDate = new Date(Date.now());
     const sunrise = new Date(sunriseTimestamp);
-    const currentDate = new Date();
 
     const oneDayLaterFromSunrise = new Date(sunrise);
     oneDayLaterFromSunrise.setTime(oneDayLaterFromSunrise.getTime() + DAY_IN_MS);
+
     return currentDate >= oneDayLaterFromSunrise;
 }
 
