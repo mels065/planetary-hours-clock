@@ -69,7 +69,5 @@ This project will display the current planetary hour, and show all the planetary
 ## Demo
 **Currently in maintenance and will be online again shortly**
 
-https://blooming-earth-87705-2e4913a98dd9.herokuapp.com/
-
 ## Acknowledgement
 This software utilizes the [`Sunrise Sunset API`](https://sunrise-sunset.org/api)
