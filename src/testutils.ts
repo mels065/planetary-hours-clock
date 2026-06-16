@@ -2,7 +2,11 @@
 // Posted by Benjamin Rae
 // Retrieved 2026-06-13, License - CC BY-SA 4.0
 
-const mockLocalStorage = (() => {
+export const mockLatitude = 39.9526;
+export const mockLongitude = -75.1652;
+export const mockTzid = "America/New_York";
+
+export const mockLocalStorage = (() => {
   let store = {} as Storage;
 
   return {
@@ -24,4 +28,14 @@ const mockLocalStorage = (() => {
   };
 })();
 
-export default mockLocalStorage;
+export const mockNavigatorGeolocation = {
+  getCurrentPosition: (cb: (position: GeolocationPosition) => void) => {
+    const mockPosition = {
+      coords: {
+        longitude: mockLongitude,
+        latitude: mockLatitude,
+      }
+    } as GeolocationPosition;
+    cb(mockPosition);
+  }
+};

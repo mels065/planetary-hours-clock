@@ -4,9 +4,10 @@ import { renderHook } from "@testing-library/react";
 
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 import * as utils from "../../utils/utils";
-import mockLocalStorage from "@/testutils";
+import { mockLocalStorage, mockNavigatorGeolocation } from "@/testutils";
 import { SunriseSunsetApiResponse } from "@/utils/interfaces";
-import { before } from "node:test";
+import { after, before } from "node:test";
+import { SpiedFunction, FunctionLike } from "jest-mock";
 
 // Source - https://stackoverflow.com/a/76655549
 // Posted by Benjamin Rae
@@ -14,6 +15,10 @@ import { before } from "node:test";
 
 Object.defineProperty(window, "localStorage", {
   value: mockLocalStorage,
+});
+
+Object.defineProperty(navigator, "geolocation", {
+  value: mockNavigatorGeolocation,
 });
 
 jest.mock("../../utils/utils.ts", () => {
@@ -25,20 +30,17 @@ jest.mock("../../utils/utils.ts", () => {
 });
 
 describe("useSunriseAndSunset hook", () => {
-    let geolocationMock;
-    before(() => {
-      geolocationMock = jest
-        .spyOn(navigator.geolocation, 'getCurrentPosition')
-        // .mockImplementation()
-    })
+    // Philly coordinates
+    const latitude = 39.9526;
+    const longitude = -75.1652;
+    const tzid = "America/New_York";
+
+    const apiUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}&formatted=0&tzid=${tzid}`
 
     test("it should call the Sunset/Sunrise API if localStorage is empty", () => {
-      const sunrise = "2026-06-13T05:29:57-04:00";
-      const sunset = "2026-06-13T20:32:02-04:00";
-      const tzid = "America/New_York";
+      const sunriseTimestamp = "2026-06-13T05:29:57-04:00";
+      const sunsetTimestamp = "2026-06-13T20:32:02-04:00";
       const status = "OK";
-
-      const apiUrl = ``
 
       const apiMock = jest
         .spyOn(axios, 'get')
@@ -49,7 +51,7 @@ describe("useSunriseAndSunset hook", () => {
                 sunrise: "2026-06-13T05:29:57-04:00",
                 sunset: "2026-06-13T20:32:02-04:00"
               },
-              status: "OK"
+              status,
             }
           })
         ));
@@ -57,7 +59,10 @@ describe("useSunriseAndSunset hook", () => {
       const { result } = renderHook(() => useSunriseAndSunset());
       
       expect(apiMock.mock.calls.length).toBeGreaterThanOrEqual(1);
-      // expect(apiMock.mock.calls[0][0]).toBe()
+      expect(apiMock.mock.calls[0][0]).toBe(apiUrl);
+
+      expect(result.current.sunriseTimestamp).toEqual(sunriseTimestamp);
+      expect(result.current.sunsetTimestamp).toEqual(sunsetTimestamp);
 
       apiMock.mockRestore();
     });
@@ -71,8 +76,9 @@ describe("useSunriseAndSunset hook", () => {
         localStorage.setItem("sunsetTimestamp", sunsetTimestamp);
         localStorage.setItem("tzid", tzid);
 
-        const { result } = renderHook(() => useSunriseAndSunset());
+        const { result } = renderHook(useSunriseAndSunset);
 
+        console.log(result.current);
         expect(result.current.sunriseTimestamp).toEqual(sunriseTimestamp);
         expect(result.current.sunsetTimestamp).toEqual(sunsetTimestamp);
     });
