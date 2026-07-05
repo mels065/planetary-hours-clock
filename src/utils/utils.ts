@@ -67,8 +67,13 @@ export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
     return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
 }
 
-export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string): string {
-    return `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0&tzid=${tzid}`;
+export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string, getYesterday?: boolean): string {
+    let apiString = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0&tzid=${tzid}`;
+    if (getYesterday) {
+        apiString += "&date=yesterday";
+    }
+    console.log(apiString)
+    return apiString;
 }
 
 export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): PlanetaryHour | null {
