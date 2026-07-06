@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { SunriseSunsetApiResponse } from "@/utils/interfaces";
 import { renderSunriseSunsetApiUrl, isNewDay } from "@/utils/utils";
-import { MILLISECONDS_IN_DAY } from "@/utils/constants";
 import axios from "axios";
 
 type SunriseSunset = {
