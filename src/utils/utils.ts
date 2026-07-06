@@ -1,5 +1,12 @@
 import { MeridiemIndicator } from "./types";
-import { DAYS_OF_WEEK, MINUTES_IN_DAY, MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, NUM_OF_PLANETARY_HOURS } from "./constants";
+import { 
+    DAYS_OF_WEEK,
+    MINUTES_IN_DAY,
+    MILLISECONDS_IN_SECOND,
+    MILLISECONDS_IN_DAY,
+    SECONDS_IN_MINUTE,
+    NUM_OF_PLANETARY_HOURS
+} from "./constants";
 import { Planet, DayOfWeek, Month } from "./enums";
 import { HourLengths, PlanetaryHour, PlanetaryDate } from "./interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
@@ -67,8 +74,12 @@ export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
     return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
 }
 
-export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string): string {
-    return `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0&tzid=${tzid}`;
+export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string, getYesterday?: boolean): string {
+    let apiString = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0&tzid=${tzid}`;
+    if (getYesterday) {
+        apiString += "&date=yesterday";
+    }
+    return apiString;
 }
 
 export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): PlanetaryHour | null {
@@ -84,13 +95,12 @@ export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): Planet
 }
 
 export function isNewDay(sunriseTimestamp: string): boolean {
-    const DAY_IN_MS = 1000 * 60 * 60 * 24 * 2;
-
+    const currentDate = new Date(Date.now());
     const sunrise = new Date(sunriseTimestamp);
-    const currentDate = new Date();
 
     const oneDayLaterFromSunrise = new Date(sunrise);
-    oneDayLaterFromSunrise.setTime(oneDayLaterFromSunrise.getTime() + DAY_IN_MS);
+    oneDayLaterFromSunrise.setTime(oneDayLaterFromSunrise.getTime() + MILLISECONDS_IN_DAY);
+
     return currentDate >= oneDayLaterFromSunrise;
 }
 

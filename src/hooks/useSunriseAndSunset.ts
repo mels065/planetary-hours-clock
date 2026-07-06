@@ -3,7 +3,6 @@ import { SunriseSunsetApiResponse } from "@/utils/interfaces";
 import { renderSunriseSunsetApiUrl, isNewDay } from "@/utils/utils";
 import axios from "axios";
 
-
 type SunriseSunset = {
     sunriseTimestamp: string,
     sunsetTimestamp: string
@@ -34,23 +33,33 @@ export default function useSunriseAndSunset(): SunriseSunset {
                     return !savedTzid || savedTzid.length === 0 || savedTzid !== clientTzid;
                 }
 
-                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid();
+                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid() || isNewDay(savedSunriseData);
             }
 
             if (IsApiCallNeeded()) {
                 navigator.geolocation.getCurrentPosition(async position => {
                         const { coords: { latitude, longitude } } = position;
 
-                        const apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid);
+                        let apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid);
                         try {
-                            const res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
+                            let res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
                             if (res.data.status !== 'OK') {
-                                throw new Error(`Response error: ${res.data.status}`)
+                                throw new Error(`Response error: ${res.data.status}`);
                             }
-                            const {
+                            let {
                                 sunrise,
                                 sunset,
                             } = res.data.results;
+
+                            if (new Date() < new Date(sunrise)) {
+                                apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid, true);
+                                res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
+                                if (res.data.status !== 'OK') {
+                                    throw new Error(`Response error: ${res.data.status}`);
+                                }
+                                sunrise = res.data.results.sunrise;
+                                sunset = res.data.results.sunset;
+                            }
 
                             localStorage.setItem('sunriseTimestamp', sunrise);
                             localStorage.setItem('sunsetTimestamp', sunset);
