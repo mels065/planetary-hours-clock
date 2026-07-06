@@ -72,7 +72,6 @@ export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string
     if (getYesterday) {
         apiString += "&date=yesterday";
     }
-    console.log(apiString)
     return apiString;
 }
 

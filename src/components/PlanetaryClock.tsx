@@ -37,7 +37,6 @@ export default function PlanetaryClock() {
 
       currentHour = renderPlanetaryHour(rawCurrentHour);
     } catch (err) {
-      console.log(err)
       return <h2 className="text-2xl">There was an internal error. Please contact administrator.</h2>;
     }
 
