@@ -7,7 +7,12 @@ import {
     SECONDS_IN_MINUTE,
     NUM_OF_PLANETARY_HOURS
 } from "./constants";
-import { Planet, DayOfWeek, Month } from "./enums";
+
+// Enums
+import Planet from "@/enums/Planet";
+import DayOfWeek from "@/enums/DayOfWeek";
+import Month from "@/enums/Month";
+
 import { HourLengths, PlanetaryHour, PlanetaryDate } from "./interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 

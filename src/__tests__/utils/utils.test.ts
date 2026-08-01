@@ -2,7 +2,7 @@ import { describe, expect, jest, test } from "@jest/globals";
 import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, isNewDay, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
 
 import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/utils/constants";
-import { Planet } from "@/utils/enums";
+import Planet from "@/enums/Planet";
 import { HourLengths, PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 

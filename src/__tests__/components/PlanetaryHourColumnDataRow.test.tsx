@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 import { render, screen } from '@testing-library/react';
 import PlanetaryHourColumnDataRow from '@/components/PlanetaryHourColumnDataRow';
 import PlanetaryInfo from "@/models/PlanetaryInfo";
-import { Planet } from "@/utils/enums";
+import Planet from "@/enums/Planet";
 import { PlanetaryHour } from "@/utils/interfaces";
 import '@testing-library/dom';
 
