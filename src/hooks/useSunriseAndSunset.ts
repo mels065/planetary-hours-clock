@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SunriseSunsetApiResponse } from "@/utils/interfaces";
+import SunriseSunsetApiResponse from "@/interfaces/SunriseSunsetApiResponse";
 import { renderSunriseSunsetApiUrl, isNewDay } from "@/utils/utils";
 import axios from "axios";
 

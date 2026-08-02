@@ -1,8 +1,8 @@
 // Enums
 import Planet from "@/enums/Planet";
-import DayOfWeek from "@/enums/DayOfWeek";
+import DayOfWeekName from "@/enums/DayOfWeekName";
 
-import { DayOfWeekObj } from "../utils/interfaces";
+import { DayOfWeek } from "@/interfaces/DayOfWeek";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export const PLANETARY_INFO = {
@@ -15,33 +15,33 @@ export const PLANETARY_INFO = {
     [Planet.Moon]: new PlanetaryInfo(Planet.Moon, "☽"),
 }
 
-export const DAYS_OF_WEEK: DayOfWeekObj[] = [
+export const DAYS_OF_WEEK: DayOfWeek[] = [
     {
-        name: DayOfWeek.Sunday,
+        name: DayOfWeekName.Sunday,
         planet: PLANETARY_INFO[Planet.Sun],
     },
     {
-        name: DayOfWeek.Monday,
+        name: DayOfWeekName.Monday,
         planet: PLANETARY_INFO[Planet.Moon],
     },
     {
-        name: DayOfWeek.Tuesday,
+        name: DayOfWeekName.Tuesday,
         planet: PLANETARY_INFO[Planet.Mars],
     },
     {
-        name: DayOfWeek.Wednesday,
+        name: DayOfWeekName.Wednesday,
         planet: PLANETARY_INFO[Planet.Mercury],
     },
     {
-        name: DayOfWeek.Thursday,
+        name: DayOfWeekName.Thursday,
         planet: PLANETARY_INFO[Planet.Jupiter],
     },
     {
-        name: DayOfWeek.Friday,
+        name: DayOfWeekName.Friday,
         planet: PLANETARY_INFO[Planet.Venus],
     },
     {
-        name: DayOfWeek.Saturday,
+        name: DayOfWeekName.Saturday,
         planet: PLANETARY_INFO[Planet.Saturn],
     },
 ]

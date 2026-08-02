@@ -10,10 +10,13 @@ import {
 
 // Enums
 import Planet from "@/enums/Planet";
-import DayOfWeek from "@/enums/DayOfWeek";
+import DayOfWeekName from "@/enums/DayOfWeekName";
 import Month from "@/enums/Month";
 
-import { HourLengths, PlanetaryHour, PlanetaryDate } from "./interfaces";
+// Interfaces
+import HourLengths from "@/interfaces/HourLengths";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
+import { PlanetaryDate } from "./interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunsetTime: Date): HourLengths {
@@ -58,7 +61,7 @@ export function generatePlanetaryHours(startTime: Date, hourTime: number, isNigh
 }
 
 export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
-    const dayOfWeek = DayOfWeek[planetaryDate.dayOfWeek.name];
+    const dayOfWeek = DayOfWeekName[planetaryDate.dayOfWeek.name];
     const planetarySigil = planetaryDate.dayOfWeek.planet.sigil;
     const month = Month[planetaryDate.date.getMonth()];
     const day = planetaryDate.date.getDate();

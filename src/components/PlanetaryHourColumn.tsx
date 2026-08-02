@@ -1,4 +1,4 @@
-import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import PlanetaryHourColumnDataRow from "./PlanetaryHourColumnDataRow";
 
 export default function PlanetaryHourColumn({ planetaryHours, isNight }: { planetaryHours: PlanetaryHour[], isNight?: boolean }) {

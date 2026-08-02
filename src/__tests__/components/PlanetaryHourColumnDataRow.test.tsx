@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import PlanetaryHourColumnDataRow from '@/components/PlanetaryHourColumnDataRow';
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 import Planet from "@/enums/Planet";
-import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import '@testing-library/dom';
 
 describe('PlanetaryHourColumnDataRow', () => {

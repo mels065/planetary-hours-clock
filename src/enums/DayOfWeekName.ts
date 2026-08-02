@@ -1,4 +1,4 @@
-enum DayOfWeek {
+enum DayOfWeekName {
     Sunday,
     Monday,
     Tuesday,
@@ -8,4 +8,4 @@ enum DayOfWeek {
     Saturday,
 }
 
-export default DayOfWeek;
+export default DayOfWeekName;

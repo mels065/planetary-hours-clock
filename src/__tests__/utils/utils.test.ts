@@ -3,7 +3,9 @@ import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, isNewD
 
 import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/constants";
 import Planet from "@/enums/Planet";
-import { HourLengths, PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
+import HourLengths from "@/interfaces/HourLengths";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
+import { PlanetaryDate } from "@/utils/interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 describe('calculateDaytimeAndNighttimeHourLengths function', () => {

@@ -1,4 +1,4 @@
-import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import { renderPlanetaryHour } from "@/utils/utils";
 
 export default function PlanetaryHourColumnDataRow(
