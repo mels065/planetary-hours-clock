@@ -2,7 +2,7 @@
 import Planet from "@/enums/Planet";
 import DayOfWeek from "@/enums/DayOfWeek";
 
-import { DayOfWeekObj } from "./interfaces";
+import { DayOfWeekObj } from "../utils/interfaces";
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export const PLANETARY_INFO = {

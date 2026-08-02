@@ -8,7 +8,7 @@ import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, getCur
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateClock } from "@/features/clock/clockSlice";
-import { DAYS_OF_WEEK } from "@/utils/constants";
+import { DAYS_OF_WEEK } from "@/constants";
 
 export default function PlanetaryClock() {
   const { sunriseTimestamp, sunsetTimestamp, apiError } = useSunriseAndSunset();

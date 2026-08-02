@@ -6,7 +6,7 @@ import {
     MILLISECONDS_IN_DAY,
     SECONDS_IN_MINUTE,
     NUM_OF_PLANETARY_HOURS
-} from "./constants";
+} from "../constants";
 
 // Enums
 import Planet from "@/enums/Planet";
