@@ -1,5 +1,5 @@
 import Planet from "@/enums/Planet"
-import { PlanetarySigil } from "@/utils/types";
+import PlanetarySigil from "@/types/PlanetarySigil";
 
 export default class PlanetaryInfo {
     planet: Planet;

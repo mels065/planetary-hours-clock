@@ -1,4 +1,4 @@
-import { MeridiemIndicator } from "./types";
+import MeridiemIndicator from "@/types/MeridiemIndicator";
 import { 
     DAYS_OF_WEEK,
     MINUTES_IN_DAY,
