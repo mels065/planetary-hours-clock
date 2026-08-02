@@ -16,7 +16,8 @@ import Month from "@/enums/Month";
 // Interfaces
 import HourLengths from "@/interfaces/HourLengths";
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
-import { PlanetaryDate } from "./interfaces";
+import PlanetaryDate from "@/interfaces/PlanetaryDate";
+
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunsetTime: Date): HourLengths {
