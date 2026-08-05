@@ -7,17 +7,6 @@ export default class PlanetaryHourCalculator {
     private dayHours: PlanetaryHour[] = [];
     private nightHours: PlanetaryHour[] = [];
 
-    private calculateDaytimeHourLengths(sunrise: Date, sunset: Date): number {
-        const daytimeSpan = (sunset.getTime() - sunrise.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
-        return daytimeSpan / NUM_OF_PLANETARY_HOURS;
-    }
-
-    private calculateNighttimeHourLengths(sunrise: Date, sunset: Date): number {
-        const daytimeSpan = (sunset.getTime() - sunrise.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
-        const nighttimeSpan = MINUTES_IN_DAY - daytimeSpan;
-        return nighttimeSpan / NUM_OF_PLANETARY_HOURS;
-    }
-
     public generatePlanetaryHours(sunrise: Date, sunset: Date): void {
         const daytimeHourTime = this.calculateDaytimeHourLengths(sunrise, sunset);
         const nighttimeHourTime = this.calculateNighttimeHourLengths(sunrise, sunset);
@@ -47,10 +36,21 @@ export default class PlanetaryHourCalculator {
     }
 
     public getDayHours(): PlanetaryHour[] {
-        return this.dayHours;
+        return this.dayHours.map(hour => ({ ...hour, planet: { ...hour.planet } })); // Return a copy of the day hours
     }
 
     public getNightHours(): PlanetaryHour[] {
-        return this.nightHours;
+        return this.nightHours.map(hour => ({ ...hour, planet: { ...hour.planet } })); // Return a copy of the night hours
+    }
+
+    private calculateDaytimeHourLengths(sunrise: Date, sunset: Date): number {
+        const daytimeSpan = (sunset.getTime() - sunrise.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
+        return daytimeSpan / NUM_OF_PLANETARY_HOURS;
+    }
+
+    private calculateNighttimeHourLengths(sunrise: Date, sunset: Date): number {
+        const daytimeSpan = (sunset.getTime() - sunrise.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
+        const nighttimeSpan = MINUTES_IN_DAY - daytimeSpan;
+        return nighttimeSpan / NUM_OF_PLANETARY_HOURS;
     }
 }

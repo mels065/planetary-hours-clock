@@ -4,7 +4,8 @@ import PlanetaryHourDisplay from "@/components/PlanetaryHourDisplay";
 import PlanetaryHourTimeTable from "@/components/PlanetaryHourTimeTable";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
-import { calculateDaytimeAndNighttimeHourLengths, generatePlanetaryHours, getCurrentPlanetaryHour, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import { getCurrentPlanetaryHour, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateClock } from "@/features/clock/clockSlice";
@@ -20,13 +21,11 @@ export default function PlanetaryClock() {
     const sunrise = new Date(sunriseTimestamp);
     const sunset = new Date(sunsetTimestamp);
 
-    const { daytimeHourTime, nighttimeHourTime } = calculateDaytimeAndNighttimeHourLengths(
-        sunrise,
-        sunset,
-    );
+    const planetaryHourCalculator = new PlanetaryHourCalculator();
+    planetaryHourCalculator.generatePlanetaryHours(sunrise, sunset);
 
-    const dayHours = generatePlanetaryHours(sunrise, daytimeHourTime);
-    const nightHours = generatePlanetaryHours(sunset, nighttimeHourTime, true);
+    const dayHours = planetaryHourCalculator.getDayHours();
+    const nightHours = planetaryHourCalculator.getNightHours();
 
     let currentHour;
     try {

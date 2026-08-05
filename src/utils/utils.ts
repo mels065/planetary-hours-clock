@@ -20,47 +20,6 @@ import PlanetaryDate from "@/interfaces/PlanetaryDate";
 
 import PlanetaryInfo from "@/models/PlanetaryInfo";
 
-export function calculateDaytimeAndNighttimeHourLengths(sunriseTime: Date, sunsetTime: Date): HourLengths {
-    const daytimeSpan = (sunsetTime.getTime() - sunriseTime.getTime()) / MILLISECONDS_IN_SECOND / SECONDS_IN_MINUTE; // Get the span of minutes from sunrise to sunset
-    const nighttimeSpan = MINUTES_IN_DAY - daytimeSpan;
-
-    const daytimeHourTime = daytimeSpan / NUM_OF_PLANETARY_HOURS;
-    const nighttimeHourTime = nighttimeSpan / NUM_OF_PLANETARY_HOURS;
-
-    return {
-        daytimeHourTime,
-        nighttimeHourTime,
-    };
-}
-
-/*
-    Function that generates the hours for either day or night
-    startTime: Date - The time that the initial hour should start at.
-    hourTime: number - The amount  of minutes that consists an hour.
-    isNight?: boolean - Optional boolean to indicate if night hours (effects starting planet).
-*/
-export function generatePlanetaryHours(startTime: Date, hourTime: number, isNight?: boolean): PlanetaryHour[] {
-    const hours : PlanetaryHour[] = [];
-    let planet: PlanetaryInfo;
-    if (isNight) {
-        planet = PlanetaryInfo.getPlanetaryInfo((DAYS_OF_WEEK[startTime.getDay()].planet.planet + NUM_OF_PLANETARY_HOURS) % PlanetaryInfo.getNumOfPlanets());
-    } else {
-        planet = DAYS_OF_WEEK[startTime.getDay()].planet;
-    }
-
-    const hourTimeMs = hourTime * 60 * 1000;
-    for(let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
-        hours.push({
-            startTime: new Date(startTime.getTime() + (hourTimeMs * i)),
-            endTime: new Date(startTime.getTime() + (hourTimeMs * (i+1))),
-            planet
-        });
-        planet = planet.getNextPlanet();
-    }
-
-    return hours;
-}
-
 export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
     const dayOfWeek = DayOfWeekName[planetaryDate.dayOfWeek.name];
     const planetarySigil = planetaryDate.dayOfWeek.planet.sigil;
