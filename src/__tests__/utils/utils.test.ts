@@ -1,29 +1,12 @@
 import { describe, expect, jest, test } from "@jest/globals";
-import { isNewDay, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+import { isNewDay, renderPlanetaryHour } from "@/utils/utils";
 
-import { DAYS_OF_WEEK, NUM_OF_PLANETARY_HOURS } from "@/constants";
 import Planet from "@/enums/Planet";
-import HourLengths from "@/interfaces/HourLengths";
 
 // Interfaces
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
-import PlanetaryDate from "@/interfaces/PlanetaryDate";
 
 import PlanetaryInfo from "@/models/PlanetaryInfo";
-
-describe('renderCurrentDate', () => {
-    const date = new Date("March 25, 2026 06:55:00");
-    const planetaryDate: PlanetaryDate = {
-        date,
-        dayOfWeek: DAYS_OF_WEEK[date.getDay()]
-    }
-
-    test('renders the correct date string', () => {
-        const expectedString = "Wednesday (☿), March 25, 2026";
-        
-        expect(renderCurrentDate(planetaryDate)).toEqual(expectedString);
-    });
-});
 
 describe('renderPlanetaryHour', () => {
     const startTime = new Date("March 25, 2026 06:55:00");

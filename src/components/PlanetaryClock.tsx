@@ -1,11 +1,18 @@
 "use client"
 
+// Components
 import PlanetaryHourDisplay from "@/components/PlanetaryHourDisplay";
 import PlanetaryHourTimeTable from "@/components/PlanetaryHourTimeTable";
 import LoadingSpinner from "@/components/LoadingSpinner";
+
+// Hooks
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
-import { getCurrentPlanetaryHour, renderCurrentDate, renderPlanetaryHour } from "@/utils/utils";
+
+// Utils
+import CurrentDateRenderer from "@/utils/CurrentDateRenderer";
+import { getCurrentPlanetaryHour, renderPlanetaryHour } from "@/utils/utils";
 import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
+
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
 import { updateClock } from "@/features/clock/clockSlice";
@@ -40,7 +47,7 @@ export default function PlanetaryClock() {
     }
 
     dispatch(updateClock({
-        currentDate: renderCurrentDate({
+        currentDate: CurrentDateRenderer.render({
             date: sunrise,
             dayOfWeek: DAYS_OF_WEEK[sunrise.getDay()]
         }),
