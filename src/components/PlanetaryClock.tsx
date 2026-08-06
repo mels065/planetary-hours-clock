@@ -10,8 +10,9 @@ import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 
 // Utils
 import CurrentDateRenderer from "@/utils/CurrentDateRenderer";
-import { getCurrentPlanetaryHour, renderPlanetaryHour } from "@/utils/utils";
 import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
+import PlanetaryHourRenderer from "@/utils/PlanetaryHourRenderer";
+import { getCurrentPlanetaryHour } from "@/utils/utils";
 
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
@@ -41,7 +42,7 @@ export default function PlanetaryClock() {
         throw new Error("Unable to resolve current planetary hour!")
       }
 
-      currentHour = renderPlanetaryHour(rawCurrentHour);
+      currentHour = PlanetaryHourRenderer.render(rawCurrentHour);
     } catch (err) {
       return <h2 className="text-2xl">There was an internal error. Please contact administrator.</h2>;
     }

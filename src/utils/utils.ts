@@ -1,34 +1,11 @@
 import MeridiemIndicator from "@/types/MeridiemIndicator";
-import { 
-    DAYS_OF_WEEK,
-    MINUTES_IN_DAY,
-    MILLISECONDS_IN_SECOND,
-    MILLISECONDS_IN_DAY,
-    SECONDS_IN_MINUTE,
-    NUM_OF_PLANETARY_HOURS
-} from "../constants";
+import { MILLISECONDS_IN_DAY } from "../constants";
 
 // Enums
 import Planet from "@/enums/Planet";
-import DayOfWeekName from "@/enums/DayOfWeekName";
-import Month from "@/enums/Month";
 
 // Interfaces
-import HourLengths from "@/interfaces/HourLengths";
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
-import PlanetaryDate from "@/interfaces/PlanetaryDate";
-
-import PlanetaryInfo from "@/models/PlanetaryInfo";
-
-export function renderCurrentDate(planetaryDate: PlanetaryDate): string {
-    const dayOfWeek = DayOfWeekName[planetaryDate.dayOfWeek.name];
-    const planetarySigil = planetaryDate.dayOfWeek.planet.sigil;
-    const month = Month[planetaryDate.date.getMonth()];
-    const day = planetaryDate.date.getDate();
-    const year = planetaryDate.date.getFullYear();
-
-    return `${dayOfWeek} (${planetarySigil}), ${month} ${day}, ${year}`
-}
 
 export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
     const { startTime, endTime, planet } = planetaryHour

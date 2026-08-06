@@ -1,11 +1,11 @@
-// Enums
 import { staticImplements } from "@/decorators";
+
+// Enums
 import DayOfWeekName from "@/enums/DayOfWeekName";
 import Month from "@/enums/Month";
 
 // Interfaces
 import DisplayTextRenderer from "@/interfaces/DisplayTextRenderer";
-
 import PlanetaryDate from "@/interfaces/PlanetaryDate";
 
 @staticImplements<DisplayTextRenderer<PlanetaryDate>>()

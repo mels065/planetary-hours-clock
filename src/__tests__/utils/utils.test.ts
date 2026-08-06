@@ -1,28 +1,5 @@
 import { describe, expect, jest, test } from "@jest/globals";
-import { isNewDay, renderPlanetaryHour } from "@/utils/utils";
-
-import Planet from "@/enums/Planet";
-
-// Interfaces
-import PlanetaryHour from "@/interfaces/PlanetaryHour";
-
-import PlanetaryInfo from "@/models/PlanetaryInfo";
-
-describe('renderPlanetaryHour', () => {
-    const startTime = new Date("March 25, 2026 06:55:00");
-    const endTime = new Date("March 25, 2026 07:56:00");
-    const planetaryHour: PlanetaryHour = {
-        startTime,
-        endTime,
-        planet: PlanetaryInfo.getPlanetaryInfo(Planet.Mercury)
-    };
-
-    test('renders the correct time string', () => {
-        const expectedString = "Hour of Mercury (☿) / 6:55am - 7:56am";
-
-        expect(renderPlanetaryHour(planetaryHour)).toEqual(expectedString);
-    })
-});
+import { isNewDay } from "@/utils/utils";
 
 describe('isNewDay', () => {
     test('returns false if same day after sunrise', () => {

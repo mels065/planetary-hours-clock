@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import { render, screen } from '@testing-library/react';
 import PlanetaryHourColumnDataRow from '@/components/PlanetaryHourColumnDataRow';
-import PlanetaryInfo from "@/models/PlanetaryInfo";
+import { PLANETARY_INFO } from "@/constants";
 import Planet from "@/enums/Planet";
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import '@testing-library/dom';
@@ -16,7 +16,7 @@ describe('PlanetaryHourColumnDataRow', () => {
     const planetaryHour: PlanetaryHour = {
         startTime,
         endTime,
-        planet: PlanetaryInfo.getPlanetaryInfo(Planet.Mercury)
+        planet: PLANETARY_INFO[Planet.Mercury]
     };
 
     test('renders with appropriate text', async () => {
