@@ -15,7 +15,7 @@ export default class DateTimeUtils {
             DateTimeUtils.spreadOffsets(newDate, opts);
         }
 
-        return oldDate;
+        return newDate;
     }
 
     public static createDateFromTimestamp(timestamp: string, opts?: DateTimeUtilsOptions): Date {
