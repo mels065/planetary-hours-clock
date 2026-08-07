@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import SunriseSunsetApiResponse from "@/interfaces/SunriseSunsetApiResponse";
+
+// Services
+import SunriseSunsetApiService from "@/services/SunriseSunsetApiService";
 
 // Utils
 import DateTimeUtils from "@/utils/DateTimeUtils";
-import { renderSunriseSunsetApiUrl } from "@/utils/utils";
-import axios from "axios";
 
 type SunriseSunset = {
     sunriseTimestamp: string,
@@ -43,25 +43,33 @@ export default function useSunriseAndSunset(): SunriseSunset {
                 navigator.geolocation.getCurrentPosition(async position => {
                         const { coords: { latitude, longitude } } = position;
 
-                        let apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid);
                         try {
-                            let res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
-                            if (res.data.status !== 'OK') {
-                                throw new Error(`Response error: ${res.data.status}`);
+                            let res = await SunriseSunsetApiService.fetchSunriseSunsetData({
+                                lat: latitude,
+                                lon: longitude,
+                                tzid: clientTzid,
+                                getYesterday: true,
+                            });
+                            if (res.status !== 'OK') {
+                                throw new Error(`Response error: ${res.status}`);
                             }
                             let {
                                 sunrise,
                                 sunset,
-                            } = res.data.results;
+                            } = res.results;
 
                             if (new Date() < new Date(sunrise)) {
-                                apiUrl = renderSunriseSunsetApiUrl(latitude, longitude, clientTzid, true);
-                                res = await axios.get<SunriseSunsetApiResponse>(apiUrl);
-                                if (res.data.status !== 'OK') {
-                                    throw new Error(`Response error: ${res.data.status}`);
+                                res = await SunriseSunsetApiService.fetchSunriseSunsetData({
+                                    lat: latitude,
+                                    lon: longitude,
+                                    tzid: clientTzid,
+                                    getYesterday: true,
+                                });
+                                if (res.status !== 'OK') {
+                                    throw new Error(`Response error: ${res.status}`);
                                 }
-                                sunrise = res.data.results.sunrise;
-                                sunset = res.data.results.sunset;
+                                sunrise = res.results.sunrise;
+                                sunset = res.results.sunset;
                             }
 
                             localStorage.setItem('sunriseTimestamp', sunrise);

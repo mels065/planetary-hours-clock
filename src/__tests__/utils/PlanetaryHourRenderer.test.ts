@@ -1,4 +1,4 @@
-import { describe, expect, jest, test } from "@jest/globals";
+import { describe, expect, test } from "@jest/globals";
 
 // Constants
 import { PLANETARY_INFO } from "@/constants";
@@ -6,8 +6,6 @@ import { PLANETARY_INFO } from "@/constants";
 import Planet from "@/enums/Planet";
 // Interfaces
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
-
-import PlanetaryInfo from "@/models/PlanetaryInfo";
 
 import PlanetaryHourRenderer from "@/utils/PlanetaryHourRenderer";
 
