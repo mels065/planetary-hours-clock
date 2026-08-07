@@ -3,6 +3,8 @@ import PlanetaryHour from '@/interfaces/PlanetaryHour';
 import { MILLISECONDS_IN_SECOND, SECONDS_IN_MINUTE, MINUTES_IN_DAY, NUM_OF_PLANETARY_HOURS, DAYS_OF_WEEK } from '../constants';
 import PlanetaryInfo from '@/models/PlanetaryInfo';
 
+import DateTimeUtils from '@/utils/DateTimeUtils';
+
 export default class PlanetaryHourCalculator {
     private dayHours: PlanetaryHour[] = [];
     private nightHours: PlanetaryHour[] = [];
@@ -41,6 +43,18 @@ export default class PlanetaryHourCalculator {
 
     public getNightHours(): PlanetaryHour[] {
         return this.nightHours.map(hour => ({ ...hour, planet: { ...hour.planet } })); // Return a copy of the night hours
+    }
+
+    public getCurrentPlanetaryHour(): PlanetaryHour {
+        const currentDate = DateTimeUtils.getCurrentDateTime(); // Use DateTimeUtils to get the current date and time
+
+        for (const hour of [...this.getDayHours(), ...this.getNightHours()]) {
+            if (hour.startTime <= currentDate && hour.endTime > currentDate) {
+                return { ...hour, planet: { ...hour.planet } }; // Return a copy of the current planetary hour
+            }
+        }
+
+        throw new Error("Unable to resolve current planetary hour!"); // Throw an error if no current planetary hour is found
     }
 
     private calculateDaytimeHourLengths(sunrise: Date, sunset: Date): number {

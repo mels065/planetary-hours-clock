@@ -7,36 +7,12 @@ import Planet from "@/enums/Planet";
 // Interfaces
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
 
-export function renderPlanetaryHour(planetaryHour: PlanetaryHour): string {
-    const { startTime, endTime, planet } = planetaryHour
-
-    const planetName = Planet[planet.planet];
-    const planetarySigil = planet.sigil;
-    const formattedStartTime = createTimeString(new Date(startTime));
-    const formattedEndTime = createTimeString(new Date(endTime));
-
-
-    return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
-}
-
 export function renderSunriseSunsetApiUrl(lat: number, lon: number, tzid: string, getYesterday?: boolean): string {
     let apiString = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0&tzid=${tzid}`;
     if (getYesterday) {
         apiString += "&date=yesterday";
     }
     return apiString;
-}
-
-export function getCurrentPlanetaryHour(planetaryHours: PlanetaryHour[]): PlanetaryHour | null {
-    const currentDate = new Date();
-    
-    for (const hour of planetaryHours) {
-        if (hour.startTime <= currentDate && hour.endTime > currentDate) {
-            return hour;
-        }
-    }
-    
-    return null;
 }
 
 export function isNewDay(sunriseTimestamp: string): boolean {
