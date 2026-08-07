@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import SunriseSunsetApiResponse from "@/interfaces/SunriseSunsetApiResponse";
-import { renderSunriseSunsetApiUrl, isNewDay } from "@/utils/utils";
+
+// Utils
+import DateTimeUtils from "@/utils/DateTimeUtils";
+import { renderSunriseSunsetApiUrl } from "@/utils/utils";
 import axios from "axios";
 
 type SunriseSunset = {
@@ -33,7 +36,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
                     return !savedTzid || savedTzid.length === 0 || savedTzid !== clientTzid;
                 }
 
-                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid() || isNewDay(savedSunriseData);
+                return isSavedSunriseDataValid() || isSavedSunsetDataValid() || isSavedTzidValid() || DateTimeUtils.isNewDay(savedSunriseData);
             }
 
             if (IsApiCallNeeded()) {
