@@ -58,7 +58,7 @@ export default function useSunriseAndSunset(): SunriseSunset {
                                 sunset,
                             } = res.results;
 
-                            if (new Date() < new Date(sunrise)) {
+                            if (DateTimeUtils.getCurrentDateTime() < DateTimeUtils.createDateFromTimestamp(sunrise)) {
                                 res = await SunriseSunsetApiService.fetchSunriseSunsetData({
                                     lat: latitude,
                                     lon: longitude,

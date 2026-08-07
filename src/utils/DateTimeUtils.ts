@@ -8,14 +8,23 @@ export default class DateTimeUtils {
         return new Date();
     }
 
+    public static createDate(oldDate: Date, opts?: DateTimeUtilsOptions): Date {
+        const newDate = new Date(oldDate);
+
+        if (opts) {
+            DateTimeUtils.spreadOffsets(newDate, opts);
+        }
+
+        return oldDate;
+    }
+
     public static createDateFromTimestamp(timestamp: string, opts?: DateTimeUtilsOptions): Date {
         const date = new Date(timestamp);
-        if (opts?.millisecondOffset) {
-            date.setTime(date.getTime() + opts.millisecondOffset);
+        
+        if (opts) {
+            DateTimeUtils.spreadOffsets(date, opts);
         }
-        if (opts?.dayOffset) {
-            date.setDate(date.getDate() + opts.dayOffset);
-        }
+
         return date;
     }
 
@@ -25,5 +34,14 @@ export default class DateTimeUtils {
         const oneDayLaterFromSunrise = DateTimeUtils.createDateFromTimestamp(sunriseTimestamp, { dayOffset: 1 });
 
         return currentDate >= oneDayLaterFromSunrise;
+    }
+
+    private static spreadOffsets(date: Date, opts: DateTimeUtilsOptions): void {
+        if (opts?.millisecondOffset) {
+            date.setTime(date.getTime() + opts.millisecondOffset);
+        }
+        if (opts?.dayOffset) {
+            date.setDate(date.getDate() + opts.dayOffset);
+        }
     }
 }

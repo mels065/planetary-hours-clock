@@ -10,6 +10,7 @@ import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 
 // Utils
 import CurrentDateRenderer from "@/utils/CurrentDateRenderer";
+import DateTimeUtils from "@/utils/DateTimeUtils";
 import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
 import PlanetaryHourRenderer from "@/utils/PlanetaryHourRenderer";
 
@@ -25,8 +26,8 @@ export default function PlanetaryClock() {
   const isClockLoading = !apiError && (sunriseTimestamp.length === 0 || sunsetTimestamp.length === 0);
 
   if (sunriseTimestamp.length > 0 && sunsetTimestamp.length > 0) {
-    const sunrise = new Date(sunriseTimestamp);
-    const sunset = new Date(sunsetTimestamp);
+    const sunrise = DateTimeUtils.createDateFromTimestamp(sunriseTimestamp);
+    const sunset = DateTimeUtils.createDateFromTimestamp(sunsetTimestamp);
 
     const planetaryHourCalculator = new PlanetaryHourCalculator();
     planetaryHourCalculator.generatePlanetaryHours(sunrise, sunset);

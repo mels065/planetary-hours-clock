@@ -20,8 +20,8 @@ export default class PlanetaryHourCalculator {
         
         for (let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
             this.dayHours.push({
-                startTime: new Date(sunrise.getTime() + (daytimeHourTimeMs * i)),
-                endTime: new Date(sunrise.getTime() + (daytimeHourTimeMs * (i + 1))),
+                startTime: DateTimeUtils.createDate(sunrise, { millisecondOffset: daytimeHourTimeMs * i }),
+                endTime: DateTimeUtils.createDate(sunrise, { millisecondOffset: daytimeHourTimeMs * (i + 1) }),
                 planet // Assign the planet information
             });
             planet = planet.getNextPlanet();
@@ -29,8 +29,8 @@ export default class PlanetaryHourCalculator {
 
         for (let i = 0; i < NUM_OF_PLANETARY_HOURS; i++) {
             this.nightHours.push({
-                startTime: new Date(sunset.getTime() + (nighttimeHourTimeMs * i)),
-                endTime: new Date(sunset.getTime() + (nighttimeHourTimeMs * (i + 1))),
+                startTime: DateTimeUtils.createDate(sunset, { millisecondOffset: nighttimeHourTimeMs * i }),
+                endTime: DateTimeUtils.createDate(sunset, { millisecondOffset: nighttimeHourTimeMs * (i + 1) }),
                 planet // Assign the planet information
             });
             planet = planet.getNextPlanet();
