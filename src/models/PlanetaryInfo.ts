@@ -1,7 +1,8 @@
-import { Planet } from "@/utils/enums"
-import { PlanetarySigil } from "@/utils/types";
+import Planet from "@/enums/Planet"
+import PlanetarySigil from "@/types/PlanetarySigil";
+import IPlanetaryInfo from "@/interfaces/IPlanetaryInfo";
 
-export default class PlanetaryInfo {
+export default class PlanetaryInfo implements IPlanetaryInfo {
     planet: Planet;
     sigil: PlanetarySigil
 

@@ -1,7 +1,7 @@
 "use client"
 
 import PlanetaryHourColumn from "./PlanetaryHourColumn";
-import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import { useSelector } from "react-redux";
 import { ClockState } from "@/features/clock/clockSlice";
 import { RootState } from "../store";

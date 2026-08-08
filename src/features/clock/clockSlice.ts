@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { PlanetaryDate, PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
 
 const initialState: ClockState = { 
     currentDate: null,

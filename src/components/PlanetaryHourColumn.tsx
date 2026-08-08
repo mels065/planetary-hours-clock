@@ -1,4 +1,6 @@
-import { PlanetaryHour } from "@/utils/interfaces";
+import PlanetaryHour from "@/interfaces/PlanetaryHour";
+import DateTimeUtils from "@/utils/DateTimeUtils";
+
 import PlanetaryHourColumnDataRow from "./PlanetaryHourColumnDataRow";
 
 export default function PlanetaryHourColumn({ planetaryHours, isNight }: { planetaryHours: PlanetaryHour[], isNight?: boolean }) {
@@ -10,7 +12,7 @@ export default function PlanetaryHourColumn({ planetaryHours, isNight }: { plane
                     return <PlanetaryHourColumnDataRow
                         key={JSON.stringify(hour)}
                         planetaryHour={hour}
-                        isInPast={hour.endTime <= new Date()}
+                        isInPast={hour.endTime <= DateTimeUtils.getCurrentDateTime()}
                     />
                 })
             }
