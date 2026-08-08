@@ -48,7 +48,6 @@ export default function useSunriseAndSunset(): SunriseSunset {
                                 lat: latitude,
                                 lon: longitude,
                                 tzid: clientTzid,
-                                getYesterday: true,
                             });
                             if (res.status !== 'OK') {
                                 throw new Error(`Response error: ${res.status}`);
