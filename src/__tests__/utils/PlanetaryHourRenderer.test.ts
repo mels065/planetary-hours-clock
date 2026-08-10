@@ -20,7 +20,7 @@ describe('PlanetaryHourRenderer', () => {
             planet: PLANETARY_INFO[Planet.Mercury],
         };
 
-        const expectedString = "Hour of Mercury (☿) / 6:55am - 7:56am";
+        const expectedString = "Hour of Mercury ☿ : 6:55am - 7:56am";
 
         expect(PlanetaryHourRenderer.render(planetaryHour)).toEqual(expectedString);
     });
