@@ -21,6 +21,6 @@ export default class PlanetaryHourRenderer {
         const formattedStartTime = TimeStringRenderer.render(DateTimeUtils.createDate(startTime));
         const formattedEndTime = TimeStringRenderer.render(DateTimeUtils.createDate(endTime));
 
-        return `Hour of ${planetName} (${planetarySigil}) / ${formattedStartTime} - ${formattedEndTime}`;
+        return `Hour of ${planetName} ${planetarySigil} : ${formattedStartTime} - ${formattedEndTime}`;
     }
 }

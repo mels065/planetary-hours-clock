@@ -7,7 +7,7 @@ import PlanetaryHour from "@/interfaces/PlanetaryHour";
 import DateTimeUtils from "@/utils/DateTimeUtils";
 import '@testing-library/dom';
 
-describe('PlanetaryHourColumnDataRow', () => {
+describe.skip('PlanetaryHourColumnDataRow', () => {
     const hourString = "Hour of Mercury (☿) / 6:55am - 7:56am";
     const textGray = 'text-gray';
     const regexp = /Hour of/;

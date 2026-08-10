@@ -1,11 +1,106 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Forum';
+  src: url('./Forum-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
 :root {
   /* Code here */
 }
 
+@theme {
+  /* Colors */
+  --color-obsidian: #0B0A0C;
+  --color-astral: #141217;
+  --color-twilight: #211E26;
+  --color-aurum: #D4AF37;
+  --color-amethyst: #6A4C9C;
+  --color-malachite: #2A6F6F;
+  --color-quartz: #E8758E;
+  --color-moonlight: #ECE8F0;
+  --color-shade: #867E93;
+
+  /* Fonts */
+  --font-forum: Forum, serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+
+  /* Border Radius */
+  --radius-sharp: 4px;
+  --radius-mystic: 12px;
+  --radius-planet: 40px;
+
+  /* Shadows */
+  --inset-shadow-xl: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 50px rgba(106, 76, 156, 0.05);
+}
+
 @theme inline {
-  /* Code here */
+  /* Colors */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,6 +109,6 @@
   }
 }
 
-body {
+html, body {
   /* Code here */
 }
