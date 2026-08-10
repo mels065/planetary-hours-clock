@@ -6,8 +6,7 @@ export default function PlanetaryHourColumnDataRow(
 )
     {
     return (
-        // <div className={`font-space-grotesk${isInPast ? " text-gray" : ""}`}>
-        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk text-moonlight p-2">
+        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk text-moonlight p-2 min-h-8">
             {PlanetaryHourRenderer.render(planetaryHour)}
         </div>
     );
