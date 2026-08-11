@@ -1,13 +1,13 @@
 import PlanetaryHour from "@/interfaces/PlanetaryHour";
-import PlanetaryHourRenderer from "@/utils/PlanetaryHourRenderer";
+import PlanetaryHourWrapper from "./PlanetaryHourWrapper";
 
 export default function PlanetaryHourColumnDataRow(
-    { planetaryHour, isInPast }: { planetaryHour: PlanetaryHour, isInPast?: boolean }
+    { planetaryHour }: { planetaryHour: PlanetaryHour }
 )
     {
     return (
-        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk text-moonlight p-2 min-h-8">
-            {PlanetaryHourRenderer.render(planetaryHour)}
+        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk p-2 min-h-8">
+            <PlanetaryHourWrapper planetaryHour={planetaryHour} />
         </div>
     );
 }

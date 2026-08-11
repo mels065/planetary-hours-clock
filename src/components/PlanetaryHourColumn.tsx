@@ -12,7 +12,6 @@ export default function PlanetaryHourColumn({ planetaryHours, isNight }: { plane
                     return <PlanetaryHourColumnDataRow
                         key={JSON.stringify(hour)}
                         planetaryHour={hour}
-                        isInPast={hour.endTime <= DateTimeUtils.getCurrentDateTime()}
                     />
                 })
             }

@@ -28,23 +28,4 @@ describe.skip('PlanetaryHourColumnDataRow', () => {
         const row = await screen.getByText(regexp);
         expect(row.textContent).toEqual(hourString);
     });
-
-    test('does not gray out if isInPast is not present', async () => {
-        render(<PlanetaryHourColumnDataRow
-            planetaryHour={planetaryHour}
-        />)
-
-        const row = await screen.getByText(regexp);
-        expect(row.classList).not.toContain(textGray);
-    })
-
-    test('grays out if time isInPast is passed to it', async () => {
-        render(<PlanetaryHourColumnDataRow
-            planetaryHour={planetaryHour}
-            isInPast={true}
-        />)
-
-        const row = await screen.getByText(regexp);
-        expect(row.classList).toContain(textGray);
-    });
 });
