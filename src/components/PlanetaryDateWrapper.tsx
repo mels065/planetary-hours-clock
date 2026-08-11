@@ -14,7 +14,7 @@ export default function PlanetaryDateWrapper({ planetaryDate }: { planetaryDate:
     const year = date.getFullYear();
     
     return (
-        <div className="font-forum text-moonlight text-4xl/22 uppercase">
+        <div className="font-forum text-moonlight md:text-4xl/22 text-3xl/12 uppercase">
             {`${dayOfWeek}`} <SigilWrapper sigil={planetarySigil} isLarge={true} /> {`${month} ${day}, ${year}`}
         </div>
     );

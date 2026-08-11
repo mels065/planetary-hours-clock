@@ -6,7 +6,7 @@ export default function PlanetaryHourColumnDataRow(
 )
     {
     return (
-        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk p-2 min-h-8">
+        <div className="even:bg-moonlight odd:bg-shade last:rounded-b-mystic text-obsidian font-space-grotesk p-2 h-[8.33%]">
             <PlanetaryHourWrapper planetaryHour={planetaryHour} />
         </div>
     );
