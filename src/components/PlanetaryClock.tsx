@@ -9,10 +9,8 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 
 // Utils
-import CurrentDateRenderer from "@/utils/CurrentDateRenderer";
 import DateTimeUtils from "@/utils/DateTimeUtils";
 import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
-import PlanetaryHourRenderer from "@/utils/PlanetaryHourRenderer";
 
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store";
@@ -37,17 +35,17 @@ export default function PlanetaryClock() {
 
     let currentHour;
     try {
-      currentHour = PlanetaryHourRenderer.render(planetaryHourCalculator.getCurrentPlanetaryHour());
+      currentHour = planetaryHourCalculator.getCurrentPlanetaryHour();
     } catch (err) {
       return <h2 className="text-2xl">There was an internal error. Please contact administrator.</h2>;
     }
 
     dispatch(updateClock({
-        currentDate: CurrentDateRenderer.render({
+        currentDate: JSON.stringify({
             date: sunrise,
             dayOfWeek: DAYS_OF_WEEK[sunrise.getDay()]
         }),
-        currentHour,
+        currentHour: JSON.stringify(currentHour),
         dayHours: JSON.stringify(dayHours),
         nightHours: JSON.stringify(nightHours),
     }))

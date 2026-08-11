@@ -13,7 +13,17 @@ export const PLANETARY_INFO = {
     [Planet.Venus]: new PlanetaryInfo(Planet.Venus, "♀"),
     [Planet.Mercury]: new PlanetaryInfo(Planet.Mercury, "☿"),
     [Planet.Moon]: new PlanetaryInfo(Planet.Moon, "☽"),
-}
+};
+
+export const SIGIL_COLORS = {
+    "♄": "bg-saturn-lead",
+    "♃": "bg-jupiter-tin",
+    "♂": "bg-mars-iron",
+    "☉": "bg-sol-gold",
+    "♀": "bg-venus-copper",
+    "☿": "bg-mercury-quicksilver",
+    "☽": "bg-luna-silver",
+};
 
 export const DAYS_OF_WEEK: DayOfWeek[] = [
     {
@@ -44,7 +54,7 @@ export const DAYS_OF_WEEK: DayOfWeek[] = [
         name: DayOfWeekName.Saturday,
         planet: PLANETARY_INFO[Planet.Saturn],
     },
-]
+];
 
 export const MINUTES_IN_DAY = 1440;
 export const MILLISECONDS_IN_SECOND = 1000;

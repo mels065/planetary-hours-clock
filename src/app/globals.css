@@ -86,6 +86,16 @@
   --color-moonlight: #ECE8F0;
   --color-shade: #867E93;
 
+  /* Sigil Colors */
+  --color-saturn-lead: #6B6B6B;
+  --color-jupiter-tin: #C8C8C8;
+  --color-mars-iron: #8B3A1A;
+  --color-sol-gold: #FFD700;
+  --color-venus-copper: #B87333;
+  --color-mercury-quicksilver: #C0C8D0;
+  --color-luna-silver: #E0E4E8;
+
+
   /* Fonts */
   --font-forum: Forum, serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
