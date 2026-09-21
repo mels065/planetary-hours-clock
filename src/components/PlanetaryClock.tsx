@@ -12,14 +12,13 @@ import useSunriseAndSunset from "@/hooks/useSunriseAndSunset";
 import DateTimeUtils from "@/utils/DateTimeUtils";
 import PlanetaryHourCalculator from "@/utils/PlanetaryHourCalculator";
 
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store";
-import { updateClock } from "@/features/clock/clockSlice";
+import useClockStore from "@/store/clockStore";
+
 import { DAYS_OF_WEEK } from "@/constants";
 
 export default function PlanetaryClock() {
   const { sunriseTimestamp, sunsetTimestamp, apiError } = useSunriseAndSunset();
-  const dispatch = useDispatch<AppDispatch>();
+  const updateClock = useClockStore((state) => state.updateClock);
 
   const isClockLoading = !apiError && (sunriseTimestamp.length === 0 || sunsetTimestamp.length === 0);
 
@@ -40,15 +39,15 @@ export default function PlanetaryClock() {
       return <h2 className="text-2xl">There was an internal error. Please contact administrator.</h2>;
     }
 
-    dispatch(updateClock({
-        currentDate: JSON.stringify({
+    updateClock({
+        currentDate: {
             date: sunrise,
             dayOfWeek: DAYS_OF_WEEK[sunrise.getDay()]
-        }),
-        currentHour: JSON.stringify(currentHour),
-        dayHours: JSON.stringify(dayHours),
-        nightHours: JSON.stringify(nightHours),
-    }))
+        },
+        currentHour: currentHour,
+        dayHours: dayHours,
+        nightHours: nightHours,
+    });
   }
 
   return (
