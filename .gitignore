@@ -44,3 +44,7 @@ next-env.d.ts
 .swc
 
 TASKS.md
+
+#deprecated files
+*_OLD.*
+*-OLD.*
